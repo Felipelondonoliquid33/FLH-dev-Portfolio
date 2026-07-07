@@ -1,35 +1,43 @@
 const slides = [
   {
-    slideTitle: "Brainstorm OS",
+    slideTitle: "Blackboard AI Ecosystem",
     slideDescription:
-      "A concept UI for a neural-thinking workspace. Designed to visualize raw ideas, tangled thoughts, and clean execution — all at once.",
+      "Bespoke HTML components and conversational agentic AI solutions tailored for course training and onboarding immersion. Visual and design system hierarchies powered by agentic systems.",
     slideUrl: "/project",
-    slideTags: ["Web Design", "UI/UX", "Concept UI", "Creative Dev"],
+    slideTags: ["AI Integration", "Blackboard", "LMS", "Copilot Studio"],
     slideImg: "/work/slider-img-1.jpg",
   },
   {
-    slideTitle: "Orange Room",
+    slideTitle: "YoAhorro IA",
     slideDescription:
-      "A surreal microsite exploring control, uniformity, and digital disconnect. Built with scroll-reactive animations and bold, brutalist layout.",
-    slideUrl: "/project",
-    slideTags: ["Creative Dev", "Scroll UX", "Experimental", "Visual Story"],
-    slideImg: "/work/slider-img-2.jpg",
+      "An AI-powered price scanner that uses Gemini Vision to identify products from a photo and instantly compares prices across 8+ Colombian retail chains via automated scraping.",
+    slideUrl: "/yoahorro.html",
+    slideTags: ["AI Vision", "React Native", "NestJS", "Price Intelligence"],
+    slideImg: "/work/slider-img-yoahorro.png",
   },
   {
-    slideTitle: "Futureschool",
+    slideTitle: "Synapsis Academy",
     slideDescription:
-      "A quirky concept for a 60s-style AI education platform. Handcrafted visuals meet structured layouts for a playful learning interface.",
-    slideUrl: "/project",
-    slideTags: ["UI Design", "Theme Concept", "Playful UX", "Frontend"],
-    slideImg: "/work/slider-img-3.jpg",
+      "An AI-powered EdTech ecosystem built with custom adaptive learning paths, real-time analytics, and gamified study modules.",
+    slideUrl: "/synapsis-academy.html",
+    slideTags: ["AI EdTech", "LMS Solutions", "Adaptive Learning", "React"],
+    slideImg: "/work/slider-img-3.png",
   },
   {
-    slideTitle: "Mindwave Grid",
+    slideTitle: "Puente de Equidad",
     slideDescription:
-      "A visual identity experiment for a VR-based ideation tool. Dynamic grids, floating modules, and warm tones bring structure to wild thinking.",
-    slideUrl: "/project",
-    slideTags: ["VR Design", "Grid System", "Creative Tech", "3D UI"],
-    slideImg: "/work/slider-img-4.jpg",
+      "An interactive, gamified simulation raising awareness on the time poverty, unpaid care labor, and systemic economic barriers faced by single mothers in Colombia.",
+    slideUrl: "/puente-de-equidad.html",
+    slideTags: ["Gamified Simulation", "Social Impact", "Neo-Brutalism", "React"],
+    slideImg: "/work/slider-img-4.png",
+  },
+  {
+    slideTitle: "Li4uid",
+    slideDescription:
+      "A premium, dark-mode digital presence for an Irish software engineering and Model Context Protocol (MCP) consulting agency.",
+    slideUrl: "/li4uid.html",
+    slideTags: ["UX/UI Design System", "React & Tailwind", "GSAP Scroll", "Corporate Branding"],
+    slideImg: "/work/slider-img-li4uid.png",
   },
 ];
 

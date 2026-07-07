@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Li4uid | Felipe Londoño | MWT July 2025 | Codegrid</title>
+    <link rel="icon" href="/global/site-icon.png" />
+    <link rel="stylesheet" href="/globals.css" />
+    <link rel="stylesheet" href="/css/transition.css" />
+    <link rel="stylesheet" href="/css/menu.css" />
+    <link rel="stylesheet" href="/css/project.css" />
+    <style>
+      @media (max-width: 1000px) {
+        .project-info .container { flex-direction: column !important; }
+        .project-info .container .project-info-col:nth-child(1) { display: block !important; margin-bottom: 2rem; }
+        .project-overview .container { flex-direction: column; gap: 3rem; }
+      }
+      :root { --li-blue: #3182ce; --li-blue-dim: rgba(49, 130, 206, 0.08); }
+      .li-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+      .li-metric { padding: 1.25rem 1.5rem; border: 1px dashed rgba(49, 130, 206, 0.25); border-radius: 10px; background: var(--li-blue-dim); transition: border-color 0.3s, background 0.3s; }
+      .li-metric:hover { border-color: rgba(49, 130, 206, 0.5); background: rgba(49, 130, 206, 0.15); }
+      .li-metric-val { font-family: "Barlow Condensed",sans-serif; font-weight: 900; font-size: 2rem; color: var(--li-blue); line-height: 1; margin-bottom: 0.3rem; }
+      .li-metric-label { font-family: "DM Mono",monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--base-secondary-dark); }
+      .li-services { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+      .li-service-tag { font-family: "DM Mono",monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.75rem; border: 1px solid rgba(49, 130, 206, 0.3); border-radius: 2rem; color: var(--li-blue); background: var(--li-blue-dim); }
+
+      /* ── Synapsis overview layout overrides ─────────────── */
+      .project-overview {
+        padding-top: 4rem;
+      }
+
+      .project-overview .container {
+        gap: 5rem;
+        align-items: center;
+      }
+
+      /* Video column — narrower */
+      .project-overview .container .project-overview-col:nth-child(1) {
+        flex: 0 0 40%;
+        max-width: 40%;
+      }
+
+      /* Text column — gets the rest */
+      .project-overview .container .project-overview-col:nth-child(2) {
+        flex: 1;
+      }
+
+      @media (max-width: 1000px) {
+        .project-overview .container {
+          flex-direction: column;
+          gap: 3rem;
+        }
+        .project-overview .container .project-overview-col:nth-child(1) {
+          flex: none;
+          max-width: 100%;
+          width: 100%;
+        }
+      }
+
+      /* ── Video Showcase Component ─────────────────────── */
+      .li4uid-video-showcase {
+        position: relative;
+        width: 100%;
+      }
+
+      /* Browser chrome frame */
+      .svc-browser {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #0a0a0a;
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.06),
+          0 32px 80px rgba(0,0,0,0.35),
+          0 8px 24px rgba(0,0,0,0.2);
+        transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+        will-change: transform;
+      }
+
+      .svc-browser:hover {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.1),
+          0 48px 100px rgba(0,0,0,0.4),
+          0 16px 40px rgba(0,0,0,0.25);
+      }
+
+      /* Browser top bar */
+      .svc-topbar {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.65rem 1rem;
+        background: #1a1a1a;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        position: relative;
+        z-index: 3;
+      }
+
+      .svc-dots {
+        display: flex;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+
+      .svc-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+      }
+      .svc-dot:nth-child(1) { background: #ff5f57; }
+      .svc-dot:nth-child(2) { background: #febc2e; }
+      .svc-dot:nth-child(3) { background: #28c840; }
+
+      .svc-url-bar {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 5px;
+        padding: 0.28rem 0.65rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        color: rgba(255,255,255,0.45);
+        letter-spacing: 0.04em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+
+      .svc-url-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #3182ce;
+        flex-shrink: 0;
+      }
+
+      .svc-live-badge {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.58rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #3182ce;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid rgba(49, 130, 206, 0.35);
+        border-radius: 3px;
+      }
+
+      .svc-live-pulse {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #3182ce;
+        animation: svc-pulse 1.4s ease-in-out infinite;
+      }
+
+      @keyframes svc-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.7); }
+      }
+
+      /* Video wrapper */
+      .svc-video-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .svc-video-wrapper video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Scan-line overlay */
+      .svc-scanlines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 2px,
+          rgba(0,0,0,0.04) 2px,
+          rgba(0,0,0,0.04) 4px
+        );
+        pointer-events: none;
+        z-index: 2;
+        mix-blend-mode: multiply;
+      }
+
+      /* Play/Pause button */
+      .svc-play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 4;
+        background: rgba(0,0,0,0.15);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .svc-video-wrapper:hover .svc-play-btn { opacity: 1; }
+
+      .svc-play-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(49, 130, 206, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(255,255,255,0.25);
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .svc-play-icon:hover {
+        transform: scale(1.1);
+        background: rgba(49, 130, 206, 1);
+      }
+
+      .svc-play-icon svg {
+        width: 18px;
+        height: 18px;
+        fill: white;
+        margin-left: 2px;
+      }
+      .svc-play-icon.is-playing svg.icon-play { display: none; }
+      .svc-play-icon.is-playing svg.icon-pause { display: block !important; }
+      .svc-play-icon svg.icon-pause { display: none; }
+
+      /* Progress bar */
+      .svc-progress-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: rgba(255,255,255,0.1);
+        z-index: 5;
+      }
+
+      .svc-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3182ce, #63b3ed);
+        width: 0%;
+        transition: width 0.1s linear;
+        border-radius: 0 2px 2px 0;
+      }
+
+      /* Bottom bar */
+      .svc-bottombar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        background: #0f0f0f;
+        border-top: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .svc-time {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6rem;
+        color: rgba(255,255,255,0.3);
+        letter-spacing: 0.06em;
+      }
+
+      .svc-mute-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.58rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: rgba(255,255,255,0.3);
+        transition: color 0.2s ease;
+      }
+
+      .svc-mute-btn:hover { color: rgba(255,255,255,0.7); }
+
+      /* Floating label badge */
+      .svc-floating-label {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        z-index: 10;
+        background: var(--base-300);
+        color: var(--base-100);
+        border-radius: 8px;
+        padding: 0.5rem 0.85rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      }
+
+      .svc-floating-label .sfl-title {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(249,244,235,0.5);
+      }
+
+      .svc-floating-label .sfl-name {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        color: var(--base-100);
+        line-height: 1;
+      }
+
+      /* Glow effect behind the browser */
+      .svc-glow {
+        position: absolute;
+        inset: -20px;
+        background: radial-gradient(ellipse at 50% 60%, rgba(49, 130, 206, 0.12), transparent 70%);
+        z-index: -1;
+        pointer-events: none;
+        border-radius: 20px;
+      }
+
+      @media (max-width: 1000px) {
+        .li4uid-video-showcase {
+          margin-bottom: 3rem;
+        }
+        .svc-browser {
+          transform: none;
+        }
+        .svc-floating-label {
+          top: -8px;
+          right: -4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="transition">
+      <div class="transition-overlay overlay"></div>
+      <div class="transition-logo"><img src="/global/logo.png" alt="Logo" /></div>
+    </div>
+    <div class="mask-transition"></div>
+    <div class="mask-bg-overlay"></div>
+
+    <nav class="menu">
+      <div class="menu-header">
+        <a href="#" class="menu-logo"><img src="/global/logo.png" alt="" /></a>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <div class="menu menu-hamburger-icon">
+            <span class="menu-item"></span>
+            <span class="menu-item"></span>
+          </div>
+        </button>
+      </div>
+      <div class="menu-overlay">
+        <nav class="menu-nav">
+          <ul>
+            <li><a href="/">Index</a></li>
+            <li><a href="/about">The Dev</a></li>
+            <li><a href="/work">Cool Stuff</a></li>
+            <li><a href="/log01">Log 01</a></li>
+            <li><a href="/contact">Ping Me</a></li>
+          </ul>
+        </nav>
+        <div class="menu-footer">
+          <div class="menu-social">
+            <a href="https://www.instagram.com/yonosenadadevos/" target="_blank"><span>&#9654;</span> Instagram</a>
+            <a href="https://www.linkedin.com/in/felipe-londo%C3%B1o-humar/?locale=en" target="_blank"><span>&#9654;</span> LinkedIn</a>
+          </div>
+          <div class="menu-time">Bogotá, CO</div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="home-spotlight-top-bar">
+      <div class="container">
+        <div class="symbols-container"><div class="symbol"><img src="/symbols/s1-dark.png" alt="Symbol" /></div></div>
+        <div class="symbols-container"><div class="symbol"><img src="/symbols/s1-dark.png" alt="Symbol" /></div></div>
+      </div>
+    </div>
+
+    <!-- PROJECT HEADER -->
+    <section class="project-header">
+      <div class="container">
+        <div class="project-title" style="display:flex;align-items:center;gap:1.5rem;">
+          <!-- Li4uid Logo SVG icon -->
+          <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+            <circle cx="50" cy="50" r="45" fill="#09090b" stroke="#3182ce" stroke-width="4"/>
+            <path d="M30 35 L30 65 H50 M50 35 V65" stroke="#3182ce" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="65" y1="35" x2="65" y2="65" stroke="#3182ce" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+          <h3 data-animate-type="reveal" data-animate-delay="0.25">Li4uid</h3>
+        </div>
+        <div class="project-header-divider"></div>
+        <div class="project-meta">
+          <div class="project-meta-col">
+            <p data-animate-type="line-reveal" data-animate-delay="0.25"><a href="https://li4uid.com" target="_blank">li4uid.com</a></p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.3">Custom Software &amp; Model Context Protocol (MCP)</p>
+          </div>
+          <div class="project-meta-col">
+            <div class="project-meta-sub-col">
+              <p data-animate-type="line-reveal" data-animate-delay="0.25">Est. 2023 – Present</p>
+              <p data-animate-type="line-reveal" data-animate-delay="0.3">UX/UI Design Architecture &amp; Brand Systems</p>
+            </div>
+            <div class="project-meta-sub-col">
+              <p data-animate-type="line-reveal" data-animate-delay="0.25">Role</p>
+              <p data-animate-type="line-reveal" data-animate-delay="0.3">UX/UI Design Lead &amp; Partner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER -->
+    <section class="project-banner-img">
+      <div class="container">
+        <img src="/project-images/li4uid-img-1.png" alt="Li4uid — Landing Page Design Mockup" />
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="project-overview">
+      <div class="container">
+        <!-- LEFT — Video Showcase -->
+        <div class="project-overview-col">
+          <div class="li4uid-video-showcase">
+            <!-- Glow layer -->
+            <div class="svc-glow"></div>
+
+            <!-- Floating label -->
+            <div class="svc-floating-label">
+              <span class="sfl-title">Live Preview</span>
+              <span class="sfl-name">Li4uid Agency</span>
+            </div>
+
+            <!-- Browser frame -->
+            <div class="svc-browser" id="svc-browser">
+              <!-- Top bar -->
+              <div class="svc-topbar">
+                <div class="svc-dots">
+                  <div class="svc-dot"></div>
+                  <div class="svc-dot"></div>
+                  <div class="svc-dot"></div>
+                </div>
+                <div class="svc-url-bar">
+                  <div class="svc-url-dot"></div>
+                  li4uid.com
+                </div>
+                <div class="svc-live-badge">
+                  <div class="svc-live-pulse"></div>
+                  Demo
+                </div>
+              </div>
+
+              <!-- Video -->
+              <div class="svc-video-wrapper" id="svc-wrapper">
+                <video
+                  id="svc-video"
+                  src="/project-images/li4uid-showcase.mov"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+
+                <!-- Scanlines -->
+                <div class="svc-scanlines"></div>
+
+                <!-- Play / Pause overlay -->
+                <div class="svc-play-btn" id="svc-play-btn">
+                  <div class="svc-play-icon" id="svc-play-icon">
+                    <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                  </div>
+                </div>
+
+                <!-- Progress bar -->
+                <div class="svc-progress-bar">
+                  <div class="svc-progress-fill" id="svc-progress"></div>
+                </div>
+              </div>
+
+              <!-- Bottom bar -->
+              <div class="svc-bottombar">
+                <span class="svc-time" id="svc-time">0:00 / 0:00</span>
+                <button class="svc-mute-btn" id="svc-mute-btn">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                    <path id="svc-mute-icon" d="M16.5 12A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                  </svg>
+                  Muted
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT — stack + copy -->
+        <div class="project-overview-col">
+          <div class="project-stack">
+            <p class="mono" data-animate-type="scramble" data-animate-delay="0.2" data-animate-on-scroll="true"><span>&#9654;</span> Stack</p>
+            <br />
+            <p data-animate-type="line-reveal" data-animate-delay="0.3" data-animate-on-scroll="true">Figma (UX/UI Design Systems)</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.4" data-animate-on-scroll="true">React &amp; Tailwind CSS</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.5" data-animate-on-scroll="true">GSAP (Scroll-driven Motion)</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.6" data-animate-on-scroll="true">Three.js / WebGL Particles</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.7" data-animate-on-scroll="true">Brand Identity Architecture</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.8" data-animate-on-scroll="true">SVG &amp; Vector Assets</p>
+          </div>
+          <div class="project-overview-copy">
+            <p class="mono" data-animate-type="scramble" data-animate-delay="1.0" data-animate-on-scroll="true"><span>&#9654;</span> Platform Background</p>
+            <br />
+            <p data-animate-type="line-reveal" data-animate-delay="1.1" data-animate-on-scroll="true">
+              Li4uid is an Irish premium software engineering and Model Context Protocol (MCP) integration agency
+              headquartered in Dublin. As Partner and UX/UI Design Lead, I engineered the entire visual identity,
+              brand assets, interface system and client-facing digital presentation layer. The interface is designed
+              as a high-fidelity minimal grid, combining dark-mode glassmorphism with high-contrast micro-typography
+              to deliver a premium corporate showcase that converts global enterprise accounts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        const video   = document.getElementById("svc-video");
+        const wrapper = document.getElementById("svc-wrapper");
+        const playBtn = document.getElementById("svc-play-btn");
+        const playIcon = document.getElementById("svc-play-icon");
+        const progress = document.getElementById("svc-progress");
+        const timeEl  = document.getElementById("svc-time");
+        const muteBtn = document.getElementById("svc-mute-btn");
+
+        if (!video) return;
+
+        function fmt(s) {
+          const m = Math.floor(s / 60);
+          const sec = Math.floor(s % 60);
+          return m + ":" + (sec < 10 ? "0" : "") + sec;
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              video.play().catch(() => {});
+              playIcon.classList.add("is-playing");
+              obs.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        obs.observe(wrapper);
+
+        wrapper.addEventListener("click", () => {
+          if (video.paused) {
+            video.play();
+            playIcon.classList.add("is-playing");
+          } else {
+            video.pause();
+            playIcon.classList.remove("is-playing");
+          }
+        });
+
+        video.addEventListener("timeupdate", () => {
+          if (!video.duration) return;
+          const pct = (video.currentTime / video.duration) * 100;
+          progress.style.width = pct + "%";
+          timeEl.textContent = fmt(video.currentTime) + " / " + fmt(video.duration);
+        });
+
+        muteBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          muteBtn.textContent = video.muted ? "🔇 Muted" : "🔊 Audio";
+        });
+
+        const browser = document.getElementById("svc-browser");
+        browser.addEventListener("mousemove", (e) => {
+          const rect = browser.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / rect.width;
+          const dy = (e.clientY - cy) / rect.height;
+          browser.style.transform =
+            `perspective(1000px) rotateY(${dx * 8}deg) rotateX(${-dy * 5}deg)`;
+        });
+        browser.addEventListener("mouseleave", () => {
+          browser.style.transform =
+            "perspective(1000px) rotateY(-4deg) rotateX(2deg)";
+        });
+      })();
+    </script>
+
+
+    <!-- SNAPSHOTS -->
+    <section class="project-snapshots">
+      <div class="home-spotlight-top-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="Symbol" /></div>
+          </div>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="Symbol" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="home-spotlight-bottom-bar">
+        <div class="container">
+          <p class="mono" data-animate-type="scramble" data-animate-delay="0.2" data-animate-on-scroll="true"><span>&#9654;</span> Interface Study</p>
+          <p class="mono" data-animate-type="scramble" data-animate-delay="0.25" data-animate-on-scroll="true">/ System Moodboard</p>
+        </div>
+      </div>
+      <div class="project-snapshots-wrapper">
+        <div class="project-snapshot"><img src="/project-images/li4uid-img-1.png" alt="Li4uid Landing Page — Hero Layout" /></div>
+        <div class="project-snapshot"><img src="/project-images/li4uid-img-2.png" alt="Li4uid — Capabilities Overview" /></div>
+        <div class="project-snapshot"><img src="/project-images/li4uid-img-3.png" alt="Li4uid — Collaborate Form UI" /></div>
+        <div class="project-snapshot"><img src="/project-images/li4uid-img-4.png" alt="Li4uid — Technical Layout Detail" /></div>
+        <div class="project-snapshot"><img src="/project-images/li4uid-img-5.png" alt="Li4uid — Adaptive Grid Structure" /></div>
+      </div>
+      <div class="snapshots-progress-bar"><div class="progress-bar"></div></div>
+    </section>
+
+    <!-- PROJECT INFO -->
+    <section class="project-info">
+      <div class="container">
+        <!-- Left — Design systems overview -->
+        <div class="project-info-col">
+          <div style="padding:2rem;border:1px dashed rgba(49, 130, 206, 0.2);border-radius:10px;background:rgba(49, 130, 206, 0.03);">
+            <div style="display:inline-flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--li-blue);border:1px solid rgba(49, 130, 206, 0.25);border-radius:3px;padding:0.25rem 0.6rem;margin-bottom:1rem;">Design System</div>
+            <h4 style="font-size:1.7rem;font-family:'Barlow Condensed';font-weight:900;text-transform:uppercase;color:var(--base-300);margin-bottom:1.25rem;line-height:0.9;">Corporate<br/>Identity</h4>
+            <p style="font-size:0.85rem;line-height:1.55;color:var(--base-secondary-dark);margin-bottom:1.5rem;">
+              Translating technical concepts like Model Context Protocol (MCP) and custom software API pipes into an elegant, visual product requires rigorous system guidelines. The Design System establishes clear graphic hierarchies, high-fidelity dark palettes, and responsive grids.
+            </p>
+            <div class="li-metrics">
+              <div class="li-metric"><div class="li-metric-val">100%</div><div class="li-metric-label">Custom Icons</div></div>
+              <div class="li-metric"><div class="li-metric-val">12+</div><div class="li-metric-label">Client Demos</div></div>
+              <div class="li-metric"><div class="li-metric-val">0</div><div class="li-metric-label">Pre-made Templates</div></div>
+              <div class="li-metric"><div class="li-metric-val">UX/UI</div><div class="li-metric-label">Focused</div></div>
+            </div>
+            <p class="mono" style="font-size:0.65rem;letter-spacing:0.1em;color:var(--base-secondary-dark);margin-top:1.5rem;margin-bottom:0.6rem;"><span>&#9654;</span> Core Services</p>
+            <div class="li-services">
+              <span class="li-service-tag">UX/UI Strategy</span>
+              <span class="li-service-tag">MCP Interfaces</span>
+              <span class="li-service-tag">SaaS Custom Design</span>
+              <span class="li-service-tag">Figma Libraries</span>
+              <span class="li-service-tag">Custom Softwares</span>
+              <span class="li-service-tag">Ireland Market</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — Engineering/Design achievements -->
+        <div class="project-info-col">
+          <div class="project-info-copy">
+            <p class="mono" data-animate-type="scramble" data-animate-delay="0.2" data-animate-on-scroll="true"><span>&#9654;</span> Design System Architecture</p>
+            <br />
+            <p data-animate-type="line-reveal" data-animate-delay="0.25" data-animate-on-scroll="true">
+              Led the creative direction and layout design of the brand website. Architected full design libraries
+              in Figma, establishing clean UI tokens, spacing systems, responsive grid templates, and custom SVG
+              technical iconography, resulting in a cohesive experience across all client materials.
+            </p>
+            <br />
+            <p data-animate-type="line-reveal" data-animate-delay="0.6" data-animate-on-scroll="true">
+              Collaborated with developers in Ireland to integrate design prototypes into clean React and Tailwind CSS
+              templates. Programmed smooth page scrollings, GSAP micro-interactions, and visual layouts to reflect the
+              original Figma design assets.
+            </p>
+            <br />
+            <p data-animate-type="line-reveal" data-animate-delay="0.9" data-animate-on-scroll="true">
+              The platform serves as Li4uid's primary sales tool, communicating complex technical architectures
+              (custom SaaS systems, AI logic integrations, database connections) through a readable and visually
+              stunning presentation layer that drives client leads.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <section class="next-project">
+      <div class="home-spotlight-top-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s3-light.png" alt="" /></div>
+          </div>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s3-light.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="container next-project-data">
+        <div class="next-project-title"><h3>Blackboard AI Ecosystem</h3></div>
+        <div class="next-project-header-divider"></div>
+        <div class="next-project-meta">
+          <div class="next-project-meta-col">
+            <p>Blackboard LMS</p>
+            <p>AI & Knowledge Automation</p>
+          </div>
+          <div class="next-project-meta-col">
+            <div class="next-project-meta-sub-col">
+              <p>October 2024 - Present</p>
+              <p>Sales Enablement & AI Integration</p>
+            </div>
+            <div class="next-project-meta-sub-col">
+              <p>Client</p>
+              <p>Blackboard</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-spotlight-bottom-bar">
+        <div class="container">
+          <p class="mono"><span>&#9654;</span> Next fragment</p>
+          <p class="mono">/ Ability Showcase</p>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="/script/lenis-scroll.js"></script>
+    <script type="module" src="/script/transition.js"></script>
+    <script type="module" src="/script/menu.js"></script>
+    <script type="module" src="/script/project.js"></script>
+  </body>
+</html>

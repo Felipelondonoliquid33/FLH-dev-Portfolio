@@ -5,6 +5,11 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/work", "destination": "/work.html" },
     { "source": "/project", "destination": "/project.html" },
+    { "source": "/log01", "destination": "/log01.html" },
+    { "source": "/puente-de-equidad", "destination": "/puente-de-equidad.html" },
+    { "source": "/synapsis-academy", "destination": "/synapsis-academy.html" },
+    { "source": "/yoahorro", "destination": "/yoahorro.html" },
+    { "source": "/li4uid", "destination": "/li4uid.html" },
     { "source": "/contact", "destination": "/contact.html" }
   ]
 }

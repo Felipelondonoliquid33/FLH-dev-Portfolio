@@ -341,3 +341,187 @@
     width: 90%;
   }
 }
+
+/* =====================================================
+   ABOUT IDENTITY — LinkedIn Profile Data Sections
+   ===================================================== */
+
+.about-identity {
+  position: relative;
+  width: 100vw;
+  background-color: var(--base-100);
+  padding-bottom: 6rem;
+  overflow: hidden;
+}
+
+/* ---- Stats Grid ---- */
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px dashed rgba(10, 10, 10, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+}
+
+.ai-stat {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-right: 1px dashed rgba(10, 10, 10, 0.12);
+  transition: background 0.35s ease;
+}
+
+.ai-stat:last-child {
+  border-right: none;
+}
+
+.ai-stat:hover {
+  background: var(--base-200);
+}
+
+.ai-stat-label {
+  font-size: 0.7rem !important;
+  color: var(--base-secondary-dark);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.ai-stat-num {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 5vw, 5rem) !important;
+  text-transform: uppercase;
+  line-height: 0.85;
+  color: var(--base-300);
+  letter-spacing: -0.02em;
+}
+
+.ai-stat-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--base-secondary-dark);
+  margin-top: 0.25rem;
+}
+
+/* ---- Quote ---- */
+.ai-quote-wrapper {
+  padding: 4rem 0;
+  border-top: 1px dashed rgba(10, 10, 10, 0.12);
+  border-bottom: 1px dashed rgba(10, 10, 10, 0.12);
+}
+
+.ai-quote {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--base-300);
+  quotes: none;
+  margin-bottom: 1.25rem;
+  max-width: 85%;
+}
+
+.ai-quote-attr {
+  font-size: 0.72rem !important;
+  color: var(--base-secondary-dark);
+  letter-spacing: 0.08em;
+}
+
+/* ---- Education ---- */
+.ai-education {
+  padding-top: 5rem;
+}
+
+.ai-education > .container > .mono {
+  font-size: 0.72rem !important;
+  color: var(--base-secondary-dark);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.1em;
+}
+
+.ai-edu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.ai-edu-item {
+  padding: 2rem;
+  border: 1px dashed rgba(10, 10, 10, 0.15);
+  border-radius: 10px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.ai-edu-item:hover {
+  border-color: rgba(10, 10, 10, 0.35);
+  background: var(--base-200);
+}
+
+.ai-edu-year {
+  font-size: 0.68rem !important;
+  color: var(--base-secondary-dark);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.ai-edu-degree {
+  font-size: 1.4rem !important;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--base-300);
+  margin-bottom: 0.5rem;
+}
+
+.ai-edu-school {
+  font-size: 0.85rem;
+  color: var(--base-secondary-dark);
+  line-height: 1.4;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1000px) {
+  .ai-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ai-stat:nth-child(2) {
+    border-right: none;
+  }
+
+  .ai-stat:nth-child(1),
+  .ai-stat:nth-child(2) {
+    border-bottom: 1px dashed rgba(10, 10, 10, 0.12);
+  }
+
+  .ai-edu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-quote {
+    max-width: 100%;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .ai-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-stat {
+    border-right: none;
+    border-bottom: 1px dashed rgba(10, 10, 10, 0.12);
+  }
+
+  .ai-stat:last-child {
+    border-bottom: none;
+  }
+}
