@@ -1,5 +1,16 @@
 import gsap from "gsap";
 
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    gsap.set(".transition-overlay", { scaleY: 0 });
+    gsap.set(".transition-logo", { opacity: 0, top: "120%" });
+    const menuToggleBtn = document.querySelector(".menu-toggle-btn");
+    if (menuToggleBtn && menuToggleBtn.classList.contains("menu-open")) {
+      menuToggleBtn.click();
+    }
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   function calculateLogoScale() {
     const logoSize = 60;
