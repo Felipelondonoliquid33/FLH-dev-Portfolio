@@ -2,7 +2,7 @@ const slides = [
   {
     slideTitle: "Blackboard AI Ecosystem",
     slideDescription:
-      "Bespoke HTML components and conversational agentic AI solutions tailored for course training and onboarding immersion. Visual and design system hierarchies powered by agentic systems.",
+      "Scalable enablement programs bridging commercial strategy and technical architecture. Integrating Copilot Studio, SharePoint, and AI chatbots to automate LMS onboarding with modular HTML/CSS custom layouts.",
     slideUrl: "/project",
     slideTags: ["AI Integration", "Blackboard", "LMS", "Copilot Studio"],
     slideImg: "/work/slider-img-1.jpg",
