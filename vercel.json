@@ -10,7 +10,6 @@
     { "source": "/synapsis-academy", "destination": "/synapsis-academy.html" },
     { "source": "/yoahorro", "destination": "/yoahorro.html" },
     { "source": "/li4uid", "destination": "/li4uid.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/cinecasero", "destination": "/cinecasero.html" }
+    { "source": "/contact", "destination": "/contact.html" }
   ]
 }

@@ -15,7 +15,6 @@ export default defineConfig({
         puente: resolve(__dirname, "puente-de-equidad.html"),
         synapsis: resolve(__dirname, "synapsis-academy.html"),
         contact: resolve(__dirname, "contact.html"),
-        cinecasero: resolve(__dirname, "cinecasero.html"),
       },
     },
     assetsInclude: [
