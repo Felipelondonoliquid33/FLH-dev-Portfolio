@@ -147,7 +147,7 @@ vite.config.ts.timestamp-*
 skills-lock.json
 
 # Large video showcases (ignore for initial push to avoid exceeding GitHub 100MB limit)
-public/project-images/synapsis-showcase.mp4
 public/project-images/li4uid-showcase.mov
+public/project-images/yoahorro-showcase.mov
 
 
