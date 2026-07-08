@@ -1,4 +1,7 @@
 import gsap from "gsap";
+import { inject } from "@vercel/analytics";
+
+inject();
 
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) {
