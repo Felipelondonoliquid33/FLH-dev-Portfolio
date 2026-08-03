@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Client Discovery | Felipe Londoño</title>
+    <link rel="icon" href="/global/site-icon.png" />
+    <link rel="stylesheet" href="/globals.css" />
+    <link rel="stylesheet" href="/css/transition.css" />
+    <link rel="stylesheet" href="/css/menu.css" />
+    <link rel="stylesheet" href="/css/onboarding.css" />
+  </head>
+  <body>
+    <!-- ── Transition ── -->
+    <div class="transition">
+      <div class="transition-overlay overlay"></div>
+      <div class="transition-logo">
+        <img src="/global/logo.png" alt="Logo" />
+      </div>
+    </div>
+    <div class="mask-transition"></div>
+    <div class="mask-bg-overlay"></div>
+
+    <!-- ── Custom Cursor ── -->
+    <div class="cursor-dot" data-dot></div>
+    <div class="cursor-ring" data-ring></div>
+
+    <!-- ── Progress Bar ── -->
+    <div class="progress-track">
+      <div class="progress-fill" data-progress></div>
+      <div class="progress-segments">
+        <span class="segment" data-segment="0"></span>
+        <span class="segment" data-segment="1"></span>
+        <span class="segment" data-segment="2"></span>
+        <span class="segment" data-segment="3"></span>
+      </div>
+    </div>
+
+    <!-- ── Nav ── -->
+    <nav class="menu">
+      <div class="menu-header">
+        <a href="/" class="menu-logo"><img src="/global/logo.png" alt="" /></a>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <div class="menu menu-hamburger-icon">
+            <span class="menu-item"></span>
+            <span class="menu-item"></span>
+          </div>
+        </button>
+      </div>
+      <div class="menu-overlay">
+        <nav class="menu-nav">
+          <ul>
+            <li><a href="/">Index</a></li>
+            <li><a href="/about">The Dev</a></li>
+            <li><a href="/work">Cool Stuff</a></li>
+            <li><a href="/log01">Log 01</a></li>
+            <li><a href="/contact">Ping Me</a></li>
+          </ul>
+        </nav>
+        <div class="menu-footer">
+          <div class="menu-social">
+            <a href="https://www.instagram.com/yonosenadadevos/" target="_blank"><span>&#9654;</span> Instagram</a>
+            <a href="https://www.linkedin.com/in/felipe-londo%C3%B1o-humar/?locale=en" target="_blank"><span>&#9654;</span> LinkedIn</a>
+          </div>
+          <div class="menu-time">Bogotá, CO</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+         HERO — Client Discovery
+    ══════════════════════════════════════ -->
+    <section class="onboard-hero" data-section="0">
+      <div class="onboard-hero-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-dark.png" alt="" /></div>
+          </div>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-dark.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-hero-content">
+        <div class="container">
+          <div class="onboard-hero-label">
+            <p class="mono" data-scramble-text="Internal Protocol">
+              Internal Protocol
+            </p>
+          </div>
+          <h2 class="onboard-hero-title" data-split-hero>
+            Client<br />Discovery
+          </h2>
+          <div class="onboard-hero-sub">
+            <p>
+              Guía de alineación técnica e infraestructura.<br />
+              Before we architect, we align.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-hero-bottom-bar">
+        <div class="container">
+          <p class="mono"><span>&#9654;</span> Scroll to begin</p>
+          <p class="mono">/ 4 Sections — 14 Questions</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         INTRO — Welcome Card
+    ══════════════════════════════════════ -->
+    <section class="onboard-intro" data-section="0">
+      <div class="container">
+        <div class="onboard-intro-card" data-intro-card>
+          <div class="intro-card-glow"></div>
+          <p class="mono intro-card-tag"><span>&#9654;</span> Protocol Start</p>
+          <p class="intro-card-text">
+            <strong>¡Bienvenido!</strong> Para construir una plataforma que realmente impulse tu organización, optimice tiempos y respete el presupuesto, necesitamos alinear un par de detalles clave. No te preocupes si no eres experto en tecnología; esta guía está diseñada paso a paso para facilitarte el proceso.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION 01 — Cultura Digital
+    ══════════════════════════════════════ -->
+    <section class="onboard-section" data-section="1" id="section-01">
+      <div class="onboard-section-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s2-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s3-dark.png" alt="" /></div>
+          </div>
+          <p class="mono"><span>&#9654;</span> Section 01</p>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s3-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s2-dark.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3 class="onboard-section-title" data-split-section>Cultura Digital</h3>
+        <p class="mono onboard-section-sub" data-scramble-text="Conceptos básicos para dummies">Conceptos básicos para dummies</p>
+
+        <div class="onboard-cards" data-card-stack>
+          <div class="q-card" data-q-card>
+            <div class="q-card-front">
+              <p class="mono q-card-num">Q 01</p>
+              <h4 class="q-card-title">El Dominio</h4>
+              <p class="q-card-label mono">( Tu Dirección )</p>
+            </div>
+            <div class="q-card-back">
+              <p class="mono q-card-num">Q 01</p>
+              <p class="q-card-desc">
+                Es el nombre de tu sitio en internet (ej. <code>tuorganizacion.org</code>). Es tu dirección física digital.
+              </p>
+              <div class="q-tip">
+                <p class="mono q-tip-label"><span>&#9654;</span> Tip tech</p>
+                <p>Búscalo en <strong>Namecheap</strong> o <strong>Porkbun</strong>. Un dominio <code>.org</code> o <code>.com</code> debe costar entre $10 y $15 USD al año.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="q-card" data-q-card>
+            <div class="q-card-front">
+              <p class="mono q-card-num">Q 02</p>
+              <h4 class="q-card-title">El Hosting</h4>
+              <p class="q-card-label mono">( Tu Terreno / Casa )</p>
+            </div>
+            <div class="q-card-back">
+              <p class="mono q-card-num">Q 02</p>
+              <p class="q-card-desc">
+                Es el servidor (computador encendido 24/7) donde viven los archivos, fotos y la base de datos de tu página.
+              </p>
+              <div class="q-tip">
+                <p class="mono q-tip-label"><span>&#9654;</span> Tip tech</p>
+                <p>Recomendamos <strong>Hostinger</strong>, <strong>DreamHost</strong> o <strong>SiteGround</strong>. Un plan de entrada ronda los $30–$50 USD el primer año.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="q-card" data-q-card>
+            <div class="q-card-front">
+              <p class="mono q-card-num">Q 03</p>
+              <h4 class="q-card-title">Las Licencias</h4>
+              <p class="q-card-label mono">( Las Herramientas )</p>
+            </div>
+            <div class="q-card-back">
+              <p class="mono q-card-num">Q 03</p>
+              <p class="q-card-desc">
+                Son los módulos o efectos avanzados (animaciones de alto nivel, procesadores de donaciones, maquetadores). Se pagan de forma independiente según las necesidades del diseño.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION 02 — Infraestructura
+    ══════════════════════════════════════ -->
+    <section class="onboard-section" data-section="2" id="section-02">
+      <div class="onboard-section-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s3-dark.png" alt="" /></div>
+          </div>
+          <p class="mono"><span>&#9654;</span> Section 02</p>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s3-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s1-dark.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3 class="onboard-section-title" data-split-section>Infraestructura</h3>
+        <p class="mono onboard-section-sub" data-scramble-text="Abordaje técnico y acceso">Abordaje técnico y acceso</p>
+
+        <div class="onboard-questions" data-question-list>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Ya tenemos Dominio y Hosting activos <em>(Por favor compártenos el proveedor)</em></p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Tenemos Dominio, pero necesitamos comprar Hosting</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">No tenemos ninguno y necesitamos orientación para comprarlos</p>
+          </div>
+        </div>
+
+        <div class="onboard-inline-questions">
+          <div class="q-inline" data-q-item>
+            <p class="mono q-inline-tag"><span>&#9654;</span> Correos</p>
+            <p class="q-text"><strong>Correos Corporativos:</strong> ¿Tienen correos con su dominio (ej. <code>contacto@tuorganizacion.org</code>) o usan proveedores externos como Google Workspace / Microsoft 365?</p>
+          </div>
+          <div class="q-inline" data-q-item>
+            <p class="mono q-inline-tag"><span>&#9654;</span> Control</p>
+            <p class="q-text"><strong>Mantenimiento y Control:</strong> ¿Quién dentro del equipo será la persona encargada de subir contenidos o noticias en el día a día?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION 03 — Vibe Check
+    ══════════════════════════════════════ -->
+    <section class="onboard-section" data-section="3" id="section-03">
+      <div class="onboard-section-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="" /></div>
+          </div>
+          <p class="mono"><span>&#9654;</span> Section 03</p>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3 class="onboard-section-title light" data-split-section>Vibe Check</h3>
+        <p class="mono onboard-section-sub light" data-scramble-text="Dirección creativa y moodboard">Dirección creativa y moodboard</p>
+
+        <div class="onboard-vibe-grid">
+          <div class="q-vibe-card" data-q-item>
+            <p class="mono q-vibe-num">01</p>
+            <p class="mono q-vibe-tag"><span>&#9654;</span> Inspiración</p>
+            <p class="q-text">Pásanos 2 o 3 enlaces de páginas web que te gusten. ¿Qué te llama la atención de ellas? <em>(animaciones de scroll, limpieza de textos, catálogo visual)</em></p>
+          </div>
+          <div class="q-vibe-card" data-q-item>
+            <p class="mono q-vibe-num">02</p>
+            <p class="mono q-vibe-tag"><span>&#9654;</span> Competencia</p>
+            <p class="q-text">Pásanos 1 o 2 páginas de organizaciones similares. ¿Qué hacen bien y qué te gustaría hacer mejor?</p>
+          </div>
+        </div>
+
+        <div class="onboard-assets" data-question-list>
+          <p class="mono onboard-assets-label"><span>&#9654;</span> Assets de Marca</p>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Contamos con Logo en vector (<code>.SVG</code>, <code>.AI</code>, <code>.PDF</code>) o <code>.PNG</code> alta definición</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Contamos con paleta de colores oficial y tipografías corporativas</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Contamos con banco de fotos/videos propios de la organización</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Utilizaremos imágenes de stock/banco gratuito para este MVP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION 04 — Alcance Operativo
+    ══════════════════════════════════════ -->
+    <section class="onboard-section" data-section="4" id="section-04">
+      <div class="onboard-section-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s3-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s2-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s1-dark.png" alt="" /></div>
+          </div>
+          <p class="mono"><span>&#9654;</span> Section 04</p>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s2-dark.png" alt="" /></div>
+            <div class="symbol"><img src="/symbols/s3-dark.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3 class="onboard-section-title" data-split-section>Alcance Operativo</h3>
+        <p class="mono onboard-section-sub" data-scramble-text="Estructura y funcionalidades">Estructura y funcionalidades</p>
+
+        <div class="onboard-sitemap" data-question-list>
+          <p class="mono onboard-sitemap-label"><span>&#9654;</span> Mapa de Navegación</p>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Home (Inicio con resumen de impacto)</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Nosotros / Historia / Equipo</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Programas / Proyectos</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Blog / Noticias / Reportes</p>
+          </div>
+          <div class="q-item" data-q-item>
+            <div class="q-checkbox">
+              <div class="q-checkbox-box"></div>
+            </div>
+            <p class="q-text">Contacto / Donaciones</p>
+          </div>
+        </div>
+
+        <div class="onboard-inline-questions">
+          <div class="q-inline" data-q-item>
+            <p class="mono q-inline-tag"><span>&#9654;</span> Donaciones</p>
+            <p class="q-text"><strong>Donaciones y Pagos:</strong> ¿Requieren botón de donaciones en línea? ¿Qué pasarela tienen activa? <em>(Wompi, Bold, PayU, PayPal, Transferencia)</em></p>
+          </div>
+          <div class="q-inline" data-q-item>
+            <p class="mono q-inline-tag"><span>&#9654;</span> Contenidos</p>
+            <p class="q-text"><strong>Contenidos:</strong> ¿Los textos del sitio ya están redactados y aprobados, o están en proceso de creación?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         OUTRO
+    ══════════════════════════════════════ -->
+    <section class="onboard-outro" data-section="4">
+      <div class="onboard-section-bar">
+        <div class="container">
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="" /></div>
+          </div>
+          <p class="mono"><span>&#9654;</span> End of Protocol</p>
+          <div class="symbols-container">
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="onboard-outro-content">
+          <h3 data-split-outro>Aligned &amp;<br />Ready.</h3>
+          <p class="mono onboard-outro-sub" data-scramble-text="Return to portfolio">
+            Return to portfolio
+          </p>
+          <div class="onboard-outro-links">
+            <a href="/" class="onboard-outro-link" data-magnetic>
+              <p class="mono">&#9654; Index</p>
+            </a>
+            <a href="/work" class="onboard-outro-link" data-magnetic>
+              <p class="mono">&#9654; Cool Stuff</p>
+            </a>
+            <a href="/contact" class="onboard-outro-link" data-magnetic>
+              <p class="mono">&#9654; Ping Me</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="/script/lenis-scroll.js"></script>
+    <script type="module" src="/script/transition.js"></script>
+    <script type="module" src="/script/menu.js"></script>
+    <script type="module" src="/script/onboarding.js"></script>
+  </body>
+</html>
