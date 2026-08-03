@@ -977,8 +977,14 @@
   color: #e8a0a0;
 }
 
-/* ---- Responsive ---- */
+/* ---- Responsive (mobile only — desktop untouched) ---- */
 @media (max-width: 900px) {
+  .onboard-hero {
+    width: 100%;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
   .onboard-hero-content .container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
@@ -988,6 +994,50 @@
   .onboard-hero-label { grid-column: 1; grid-row: 1; }
   .onboard-hero-title { grid-column: 1; grid-row: 2; }
   .onboard-hero-sub { grid-column: 1; grid-row: 3; }
+
+  .onboard-hero-title {
+    font-size: clamp(2.6rem, 13vw, 4.25rem);
+    line-height: 0.92;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  .onboard-intro,
+  .onboard-section,
+  .onboard-outro {
+    width: 100%;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .onboard-section-title {
+    font-size: clamp(2.35rem, 11vw, 3.5rem);
+    line-height: 0.95;
+    margin: 2.5rem 0 0.85rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  .onboard-outro-content h3 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+    line-height: 0.95;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* Sticky bars + virtual keyboard cause scroll rubber-banding on iOS */
+  .onboard-section-bar {
+    position: relative;
+    top: auto;
+  }
+
+  .onboard-section-title .hero-char,
+  .onboard-section-title div,
+  [data-split-section] {
+    max-width: 100%;
+  }
 
   .onboard-vibe-grid {
     grid-template-columns: 1fr;
@@ -1021,5 +1071,11 @@
 
   .onboard-identity-grid .onboard-field-block:first-child {
     grid-column: auto;
+  }
+
+  /* 16px+ inputs avoid iOS zoom-on-focus, which also jumps scroll */
+  .onboard-input,
+  .onboard-textarea {
+    font-size: 16px;
   }
 }

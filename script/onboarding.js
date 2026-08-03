@@ -117,6 +117,15 @@ function initOnboardForm() {
     el.addEventListener("click", (e) => e.stopPropagation());
   });
 
+  // Mobile: pause any Lenis instance while typing so the keyboard doesn't yank scroll
+  const isTouchForm = window.innerWidth <= 900 || "ontouchstart" in window;
+  if (isTouchForm) {
+    form.querySelectorAll("input, textarea").forEach((field) => {
+      field.addEventListener("focus", () => window.__lenis?.stop?.());
+      field.addEventListener("blur", () => window.__lenis?.start?.());
+    });
+  }
+
   // Exclusive radio group for infra + conditional provider
   form.querySelectorAll("[data-radio-group='infra'] [data-radio]").forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -389,24 +398,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ── Section Titles — Split Reveal ──────────────
+  // On mobile, never reverse — keyboard/viewport resize was re-triggering
+  // leaveBack and fighting the form scroll.
   document.querySelectorAll("[data-split-section]").forEach((el) => {
     const split = SplitText.create(el, { type: "words,chars" });
 
     ScrollTrigger.create({
       trigger: el,
       start: "top 82%",
-      toggleActions: "play none none reverse",
+      toggleActions: isMobile ? "play none none none" : "play none none reverse",
       onEnter: () => {
         gsap.from(split.chars, {
           yPercent: 120,
-          rotate: 6,
+          rotate: isMobile ? 0 : 6,
           opacity: 0,
-          stagger: 0.03,
+          stagger: isMobile ? 0.02 : 0.03,
           duration: 0.7,
           ease: "power4.out",
         });
       },
       onLeaveBack: () => {
+        if (isMobile) return;
         gsap.set(split.chars, { yPercent: 120, opacity: 0 });
       },
     });
@@ -419,9 +431,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ScrollTrigger.create({
       trigger: el,
       start: "top 85%",
-      toggleActions: "play none none reverse",
+      toggleActions: isMobile ? "play none none none" : "play none none reverse",
       onEnter: () => scrambleTo(el, finalText, 0.9),
       onLeaveBack: () => {
+        if (isMobile) return;
         el.textContent = finalText;
       },
     });
