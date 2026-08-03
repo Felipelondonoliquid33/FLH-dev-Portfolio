@@ -881,6 +881,8 @@
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 2;
 }
 
 .onboard-outro-links {
@@ -917,13 +919,18 @@
 }
 
 .onboard-submit-btn {
-  border-color: rgba(249, 244, 235, 0.45);
-  background: rgba(249, 244, 235, 0.06);
+  border-color: rgba(249, 244, 235, 0.55);
+  background: rgba(249, 244, 235, 0.12);
+  padding: 1rem 2rem;
+}
+
+.onboard-submit-btn p {
+  font-size: 0.9rem !important;
 }
 
 .onboard-submit-btn.secondary {
   background: transparent;
-  border-color: rgba(249, 244, 235, 0.25);
+  border-color: rgba(249, 244, 235, 0.35);
 }
 
 .onboard-outro-link.subtle {

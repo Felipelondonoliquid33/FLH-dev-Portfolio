@@ -550,8 +550,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ── Outro Links Entrance ──────────────────────
-  gsap.from(".onboard-outro-link", {
+  // ── Outro Submit + Links Entrance ─────────────
+  // Do not animate opacity on submit buttons — a previous from() left them
+  // stuck at opacity:0 because the trigger was on the portfolio links below.
+  gsap.from(".onboard-submit-btn", {
+    y: 24,
+    stagger: 0.1,
+    duration: 0.65,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".onboard-submit-actions",
+      start: "top 95%",
+      toggleActions: "play none none none",
+    },
+  });
+
+  gsap.from(".onboard-outro-links .onboard-outro-link", {
     y: 20,
     opacity: 0,
     stagger: 0.12,
@@ -559,8 +573,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "power3.out",
     scrollTrigger: {
       trigger: ".onboard-outro-links",
-      start: "top 90%",
-      toggleActions: "play none none reverse",
+      start: "top 95%",
+      toggleActions: "play none none none",
     },
   });
 
