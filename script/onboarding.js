@@ -4,7 +4,232 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+const WA_NUMBER = "573112704276";
+const FORMSUBMIT_URL = "https://formsubmit.co/ajax/flondonohumar@gmail.com";
+
+function val(form, name) {
+  const el = form.elements.namedItem(name);
+  return el && "value" in el ? String(el.value).trim() : "";
+}
+
+function collectResponses(form) {
+  const name = val(form, "client_name");
+  const email = val(form, "client_email");
+  const phone = val(form, "client_phone");
+
+  const infraChecked = form.querySelector("[data-radio-group='infra'] .q-item.checked");
+  const infraStatus = infraChecked?.getAttribute("data-value") || "—";
+  const provider = val(form, "infra_provider");
+
+  const assets = [...form.querySelectorAll(".onboard-assets .q-item.checked")]
+    .map((el) => el.getAttribute("data-value"))
+    .filter(Boolean);
+
+  const sitemapLines = [...form.querySelectorAll("[data-sitemap]")].map((item) => {
+    const page = item.getAttribute("data-value") || "Página";
+    const checked = item.classList.contains("checked");
+    const note = item.querySelector("textarea")?.value.trim() || "";
+    const mark = checked ? "[x]" : "[ ]";
+    return note ? `${mark} ${page} — notas: ${note}` : `${mark} ${page}`;
+  });
+
+  const lines = [
+    `*Client Discovery — ${name || "Sin nombre"}*`,
+    `Contacto: ${name || "—"} / ${email || "—"} / ${phone || "—"}`,
+    "",
+    "INFRA",
+    `- Estado: ${infraStatus}`,
+    provider ? `- Proveedor: ${provider}` : null,
+    `- Correos: ${val(form, "emails") || "—"}`,
+    `- Mantenimiento: ${val(form, "maintenance") || "—"}`,
+    "",
+    "VIBE",
+    `- Inspiración: ${val(form, "inspiration") || "—"}`,
+    `- Competencia: ${val(form, "competition") || "—"}`,
+    "",
+    "ASSETS",
+    ...(assets.length ? assets.map((a) => `- [x] ${a}`) : ["- (ninguno marcado)"]),
+    "",
+    "SITEMAP",
+    ...sitemapLines,
+    "",
+    "ALCANCE",
+    `- Donaciones: ${val(form, "donations") || "—"}`,
+    `- Contenidos: ${val(form, "contents") || "—"}`,
+  ].filter((line) => line !== null);
+
+  return {
+    name,
+    email,
+    phone,
+    summary: lines.join("\n"),
+    infraStatus,
+    provider,
+    emails: val(form, "emails"),
+    maintenance: val(form, "maintenance"),
+    inspiration: val(form, "inspiration"),
+    competition: val(form, "competition"),
+    assets: assets.join("; "),
+    sitemap: sitemapLines.join("\n"),
+    donations: val(form, "donations"),
+    contents: val(form, "contents"),
+  };
+}
+
+function validateForm(form, data) {
+  if (!data.name) {
+    form.querySelector("#client-name")?.focus();
+    return "Por favor escribe tu nombre u organización.";
+  }
+  if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    form.querySelector("#client-email")?.focus();
+    return "Por favor escribe un email válido.";
+  }
+  const touched =
+    form.querySelector(".q-item.checked") ||
+    [...form.querySelectorAll("textarea, input[type='text'], input[type='tel']")].some(
+      (el) => el.id !== "client-name" && el.id !== "client-email" && el.value.trim()
+    );
+  if (!touched) {
+    return "Marca o completa al menos una respuesta antes de enviar.";
+  }
+  return null;
+}
+
+function setFormStatus(el, message, type = "") {
+  if (!el) return;
+  el.textContent = message;
+  el.classList.remove("is-error", "is-success", "is-pending");
+  if (type) el.classList.add(type);
+}
+
+function initOnboardForm() {
+  const form = document.getElementById("onboard-form");
+  if (!form) return;
+
+  const statusEl = form.querySelector("[data-form-status]");
+  const providerField = form.querySelector("#provider-field");
+  const emailBtn = form.querySelector("[data-submit-email]");
+  const waBtn = form.querySelector("[data-submit-whatsapp]");
+
+  // Stop checkbox toggle when interacting with fields
+  form.querySelectorAll("input, textarea, label, button").forEach((el) => {
+    el.addEventListener("click", (e) => e.stopPropagation());
+  });
+
+  // Exclusive radio group for infra + conditional provider
+  form.querySelectorAll("[data-radio-group='infra'] [data-radio]").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      if (e.target.closest("input, textarea, label, button")) return;
+      const group = item.closest("[data-radio-group]");
+      group.querySelectorAll("[data-radio]").forEach((sib) => {
+        if (sib !== item) sib.classList.remove("checked");
+      });
+      item.classList.toggle("checked");
+
+      const box = item.querySelector(".q-checkbox-box");
+      if (box && item.classList.contains("checked")) {
+        gsap.fromTo(box, { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
+      }
+
+      const showProvider = !!group.querySelector("[data-radio].checked[data-shows-provider]");
+      if (providerField) {
+        providerField.hidden = !showProvider;
+        if (!showProvider) {
+          const input = providerField.querySelector("input");
+          if (input) input.value = "";
+        }
+      }
+    });
+  });
+
+  // Multi-select checkboxes (assets + sitemap) — skip radios handled above
+  form.querySelectorAll(".q-item[data-check]").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      if (e.target.closest("input, textarea, label, button")) return;
+      item.classList.toggle("checked");
+      const box = item.querySelector(".q-checkbox-box");
+      if (box && item.classList.contains("checked")) {
+        gsap.fromTo(box, { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
+      }
+    });
+  });
+
+  async function sendEmail(data) {
+    setFormStatus(statusEl, "Enviando por email…", "is-pending");
+    if (emailBtn) emailBtn.disabled = true;
+
+    try {
+      const res = await fetch(FORMSUBMIT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `Client Discovery — ${data.name}`,
+          _replyto: data.email,
+          _template: "box",
+          name: data.name,
+          email: data.email,
+          phone: data.phone || "—",
+          infra_status: data.infraStatus,
+          infra_provider: data.provider || "—",
+          emails: data.emails || "—",
+          maintenance: data.maintenance || "—",
+          inspiration: data.inspiration || "—",
+          competition: data.competition || "—",
+          assets: data.assets || "—",
+          sitemap: data.sitemap || "—",
+          donations: data.donations || "—",
+          contents: data.contents || "—",
+          message: data.summary,
+        }),
+      });
+
+      if (!res.ok) throw new Error("send_failed");
+      setFormStatus(statusEl, "Listo. Tus respuestas llegaron por email.", "is-success");
+    } catch {
+      setFormStatus(
+        statusEl,
+        "No se pudo enviar el email. Prueba WhatsApp o escríbeme a flondonohumar@gmail.com.",
+        "is-error"
+      );
+    } finally {
+      if (emailBtn) emailBtn.disabled = false;
+    }
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = collectResponses(form);
+    const error = validateForm(form, data);
+    if (error) {
+      setFormStatus(statusEl, error, "is-error");
+      document.getElementById("onboard-identity")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    sendEmail(data);
+  });
+
+  waBtn?.addEventListener("click", () => {
+    const data = collectResponses(form);
+    const error = validateForm(form, data);
+    if (error) {
+      setFormStatus(statusEl, error, "is-error");
+      document.getElementById("onboard-identity")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(data.summary)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    setFormStatus(statusEl, "Abriendo WhatsApp con tu resumen…", "is-success");
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Form always initializes (even with reduced motion)
+  initOnboardForm();
+
   // ── Guards ──────────────────────────────────────
   const isMobile = window.innerWidth < 1000;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -34,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Hover ring expand
     const hoverTargets = document.querySelectorAll(
-      ".q-item, .q-card, .onboard-outro-link, .q-vibe-card, .q-inline, a"
+      ".q-item, .q-card, .onboard-outro-link, .onboard-submit-btn, .q-vibe-card, .q-inline, a"
     );
     hoverTargets.forEach((el) => {
       el.addEventListener("mouseenter", () => ring?.classList.add("cursor-hover"));
@@ -249,19 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ── Checkbox Toggle ────────────────────────────
-  document.querySelectorAll(".q-item").forEach((item) => {
-    item.addEventListener("click", () => {
-      item.classList.toggle("checked");
-
-      const box = item.querySelector(".q-checkbox-box");
-      if (box) {
-        if (item.classList.contains("checked")) {
-          gsap.fromTo(box, { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
-        }
-      }
-    });
-  });
+  // Checkbox / radio toggles live in initOnboardForm()
 
   // ── Inline Questions ───────────────────────────
   document.querySelectorAll(".q-inline").forEach((el) => {

@@ -143,7 +143,7 @@
 
       <div class="container">
         <h3 class="onboard-section-title" data-split-section>Cultura Digital</h3>
-        <p class="mono onboard-section-sub" data-scramble-text="Conceptos básicos para dummies">Conceptos básicos para dummies</p>
+        <p class="mono onboard-section-sub" data-scramble-text="Conceptos básicos">Conceptos básicos</p>
 
         <div class="onboard-cards" data-card-stack>
           <div class="q-card" id="q-card-1" data-q-card>
@@ -243,6 +243,8 @@
       </div>
     </section>
 
+    <form id="onboard-form" novalidate>
+
     <!-- ══════════════════════════════════════
          SECTION 02 — Infraestructura
     ══════════════════════════════════════ -->
@@ -265,20 +267,20 @@
         <h3 class="onboard-section-title" data-split-section>Infraestructura</h3>
         <p class="mono onboard-section-sub" data-scramble-text="Abordaje técnico y acceso">Abordaje técnico y acceso</p>
 
-        <div class="onboard-questions" data-question-list>
-          <div class="q-item" data-q-item>
+        <div class="onboard-questions" data-question-list data-radio-group="infra">
+          <div class="q-item" data-q-item data-radio data-value="Ya tenemos Dominio y Hosting activos" data-shows-provider>
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
             <p class="q-text">Ya tenemos Dominio y Hosting activos <em>(Por favor compártenos el proveedor)</em></p>
           </div>
-          <div class="q-item" data-q-item>
+          <div class="q-item" data-q-item data-radio data-value="Tenemos Dominio, pero necesitamos comprar Hosting" data-shows-provider>
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
             <p class="q-text">Tenemos Dominio, pero necesitamos comprar Hosting</p>
           </div>
-          <div class="q-item" data-q-item>
+          <div class="q-item" data-q-item data-radio data-value="No tenemos ninguno y necesitamos orientación para comprarlos">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -286,14 +288,38 @@
           </div>
         </div>
 
+        <div class="onboard-field-block" id="provider-field" hidden>
+          <label class="mono onboard-field-label" for="infra-provider">Proveedor de dominio / hosting</label>
+          <input
+            class="onboard-input"
+            type="text"
+            id="infra-provider"
+            name="infra_provider"
+            placeholder="Ej. Hostinger, Namecheap, GoDaddy…"
+            autocomplete="organization"
+          />
+        </div>
+
         <div class="onboard-inline-questions">
           <div class="q-inline" data-q-item>
             <p class="mono q-inline-tag"><span>&#9654;</span> Correos</p>
             <p class="q-text"><strong>Correos Corporativos:</strong> ¿Tienen correos con su dominio (ej. <code>contacto@tuorganizacion.org</code>) o usan proveedores externos como Google Workspace / Microsoft 365?</p>
+            <textarea
+              class="onboard-textarea"
+              name="emails"
+              rows="3"
+              placeholder="Ej. Usamos Google Workspace / contacto@org.org / aún no tenemos…"
+            ></textarea>
           </div>
           <div class="q-inline" data-q-item>
             <p class="mono q-inline-tag"><span>&#9654;</span> Control</p>
             <p class="q-text"><strong>Mantenimiento y Control:</strong> ¿Quién dentro del equipo será la persona encargada de subir contenidos o noticias en el día a día?</p>
+            <textarea
+              class="onboard-textarea"
+              name="maintenance"
+              rows="2"
+              placeholder="Nombre y rol de la persona encargada"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -326,35 +352,47 @@
             <p class="mono q-vibe-num">01</p>
             <p class="mono q-vibe-tag"><span>&#9654;</span> Inspiración</p>
             <p class="q-text">Pásanos 2 o 3 enlaces de páginas web que te gusten. ¿Qué te llama la atención de ellas? <em>(animaciones de scroll, limpieza de textos, catálogo visual)</em></p>
+            <textarea
+              class="onboard-textarea light"
+              name="inspiration"
+              rows="4"
+              placeholder="Pega enlaces y qué te gusta de cada uno…"
+            ></textarea>
           </div>
           <div class="q-vibe-card" data-q-item>
             <p class="mono q-vibe-num">02</p>
             <p class="mono q-vibe-tag"><span>&#9654;</span> Competencia</p>
             <p class="q-text">Pásanos 1 o 2 páginas de organizaciones similares. ¿Qué hacen bien y qué te gustaría hacer mejor?</p>
+            <textarea
+              class="onboard-textarea light"
+              name="competition"
+              rows="4"
+              placeholder="Pega enlaces y tus observaciones…"
+            ></textarea>
           </div>
         </div>
 
         <div class="onboard-assets" data-question-list>
           <p class="mono onboard-assets-label"><span>&#9654;</span> Assets de Marca</p>
-          <div class="q-item" data-q-item>
+          <div class="q-item" data-q-item data-check data-value="Logo en vector (.SVG, .AI, .PDF) o PNG alta definición">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
             <p class="q-text">Contamos con Logo en vector (<code>.SVG</code>, <code>.AI</code>, <code>.PDF</code>) o <code>.PNG</code> alta definición</p>
           </div>
-          <div class="q-item" data-q-item>
+          <div class="q-item" data-q-item data-check data-value="Paleta de colores oficial y tipografías corporativas">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
             <p class="q-text">Contamos con paleta de colores oficial y tipografías corporativas</p>
           </div>
-          <div class="q-item" data-q-item>
+          <div class="q-item" data-q-item data-check data-value="Banco de fotos/videos propios de la organización">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
             <p class="q-text">Contamos con banco de fotos/videos propios de la organización</p>
           </div>
-          <div class="q-item" data-q-item>
+          <div class="q-item" data-q-item data-check data-value="Usaremos imágenes de stock/banco gratuito para este MVP">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -393,7 +431,7 @@
             <p class="mono"><span>&#9654;</span> Mapa de Navegación</p>
             <p class="onboard-sitemap-hint">Marca las que necesitas y descríbenos brevemente qué contenido esperas en cada una</p>
           </div>
-          <div class="q-item q-item-rich" data-q-item>
+          <div class="q-item q-item-rich" data-q-item data-check data-sitemap data-value="Home">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -402,10 +440,11 @@
               <p class="q-item-desc">Inicio con resumen de impacto, misión y llamado a la acción principal</p>
               <div class="q-item-notes">
                 <span class="q-item-notes-hint mono">Ej. ¿Qué quieres que sea lo primero que vean?</span>
+                <textarea class="onboard-textarea" name="sitemap_home" rows="2" placeholder="Notas sobre Home…"></textarea>
               </div>
             </div>
           </div>
-          <div class="q-item q-item-rich" data-q-item>
+          <div class="q-item q-item-rich" data-q-item data-check data-sitemap data-value="Nosotros">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -414,10 +453,11 @@
               <p class="q-item-desc">Historia, equipo, filosofía de trabajo</p>
               <div class="q-item-notes">
                 <span class="q-item-notes-hint mono">Ej. ¿Quiénes son las caras visibles de la organización?</span>
+                <textarea class="onboard-textarea" name="sitemap_nosotros" rows="2" placeholder="Notas sobre Nosotros…"></textarea>
               </div>
             </div>
           </div>
-          <div class="q-item q-item-rich" data-q-item>
+          <div class="q-item q-item-rich" data-q-item data-check data-sitemap data-value="Programas / Proyectos">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -426,10 +466,11 @@
               <p class="q-item-desc">Catálogo de iniciativas activas con métricas de impacto</p>
               <div class="q-item-notes">
                 <span class="q-item-notes-hint mono">Ej. ¿Cuántos programas necesitas mostrar y con qué nivel de detalle?</span>
+                <textarea class="onboard-textarea" name="sitemap_programas" rows="2" placeholder="Notas sobre Programas…"></textarea>
               </div>
             </div>
           </div>
-          <div class="q-item q-item-rich" data-q-item>
+          <div class="q-item q-item-rich" data-q-item data-check data-sitemap data-value="Blog / Noticias / Reportes">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -438,10 +479,11 @@
               <p class="q-item-desc">Espacio de contenido dinámico, actualizaciones y reportes de transparencia</p>
               <div class="q-item-notes">
                 <span class="q-item-notes-hint mono">Ej. ¿Con qué frecuencia publicarán contenido nuevo?</span>
+                <textarea class="onboard-textarea" name="sitemap_blog" rows="2" placeholder="Notas sobre Blog / Noticias…"></textarea>
               </div>
             </div>
           </div>
-          <div class="q-item q-item-rich" data-q-item>
+          <div class="q-item q-item-rich" data-q-item data-check data-sitemap data-value="Contacto / Donaciones">
             <div class="q-checkbox">
               <div class="q-checkbox-box"></div>
             </div>
@@ -450,6 +492,7 @@
               <p class="q-item-desc">Formulario de contacto, botón de donación, ubicación y redes sociales</p>
               <div class="q-item-notes">
                 <span class="q-item-notes-hint mono">Ej. ¿Qué métodos de contacto prefieren? ¿Tienen ubicación física?</span>
+                <textarea class="onboard-textarea" name="sitemap_contacto" rows="2" placeholder="Notas sobre Contacto / Donaciones…"></textarea>
               </div>
             </div>
           </div>
@@ -459,17 +502,72 @@
           <div class="q-inline" data-q-item>
             <p class="mono q-inline-tag"><span>&#9654;</span> Donaciones</p>
             <p class="q-text"><strong>Donaciones y Pagos:</strong> ¿Requieren botón de donaciones en línea? ¿Qué pasarela tienen activa? <em>(Wompi, Bold, PayU, PayPal, Transferencia)</em></p>
+            <textarea
+              class="onboard-textarea"
+              name="donations"
+              rows="3"
+              placeholder="Ej. Sí, usamos Wompi / Solo transferencia / Aún no tenemos pasarela…"
+            ></textarea>
           </div>
           <div class="q-inline" data-q-item>
             <p class="mono q-inline-tag"><span>&#9654;</span> Contenidos</p>
             <p class="q-text"><strong>Contenidos:</strong> ¿Los textos del sitio ya están redactados y aprobados, o están en proceso de creación?</p>
+            <textarea
+              class="onboard-textarea"
+              name="contents"
+              rows="3"
+              placeholder="Ej. Ya aprobados / En borrador / Necesitamos ayuda redactando…"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Identity block -->
+        <div class="onboard-identity" id="onboard-identity">
+          <p class="mono onboard-identity-label"><span>&#9654;</span> Tus datos de contacto</p>
+          <p class="onboard-identity-hint">Para enviarte la propuesta y poder responderte</p>
+          <div class="onboard-identity-grid">
+            <div class="onboard-field-block">
+              <label class="mono onboard-field-label" for="client-name">Nombre / Organización *</label>
+              <input
+                class="onboard-input"
+                type="text"
+                id="client-name"
+                name="client_name"
+                required
+                placeholder="Tu nombre o el de la organización"
+                autocomplete="organization"
+              />
+            </div>
+            <div class="onboard-field-block">
+              <label class="mono onboard-field-label" for="client-email">Email *</label>
+              <input
+                class="onboard-input"
+                type="email"
+                id="client-email"
+                name="client_email"
+                required
+                placeholder="tu@email.com"
+                autocomplete="email"
+              />
+            </div>
+            <div class="onboard-field-block">
+              <label class="mono onboard-field-label" for="client-phone">Teléfono <span class="optional">(opcional)</span></label>
+              <input
+                class="onboard-input"
+                type="tel"
+                id="client-phone"
+                name="client_phone"
+                placeholder="+57 300 000 0000"
+                autocomplete="tel"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ══════════════════════════════════════
-         OUTRO
+         OUTRO — Submit
     ══════════════════════════════════════ -->
     <section class="onboard-outro" data-section="4">
       <div class="onboard-section-bar">
@@ -486,23 +584,37 @@
       <div class="container">
         <div class="onboard-outro-content">
           <h3 data-split-outro>Aligned &amp;<br />Ready.</h3>
-          <p class="mono onboard-outro-sub" data-scramble-text="Return to portfolio">
-            Return to portfolio
+          <p class="mono onboard-outro-sub" data-scramble-text="Envíanos tus respuestas">
+            Envíanos tus respuestas
           </p>
+
+          <div class="onboard-submit-actions">
+            <button type="submit" class="onboard-outro-link onboard-submit-btn" data-magnetic data-submit-email>
+              <p class="mono">&#9654; Enviar respuestas</p>
+            </button>
+            <button type="button" class="onboard-outro-link onboard-submit-btn secondary" data-magnetic data-submit-whatsapp>
+              <p class="mono">&#9654; Enviar por WhatsApp</p>
+            </button>
+          </div>
+
+          <p class="mono onboard-form-status" data-form-status aria-live="polite"></p>
+
           <div class="onboard-outro-links">
-            <a href="/" class="onboard-outro-link" data-magnetic>
+            <a href="/" class="onboard-outro-link subtle" data-magnetic>
               <p class="mono">&#9654; Index</p>
             </a>
-            <a href="/work" class="onboard-outro-link" data-magnetic>
+            <a href="/work" class="onboard-outro-link subtle" data-magnetic>
               <p class="mono">&#9654; Cool Stuff</p>
             </a>
-            <a href="/contact" class="onboard-outro-link" data-magnetic>
+            <a href="/contact" class="onboard-outro-link subtle" data-magnetic>
               <p class="mono">&#9654; Ping Me</p>
             </a>
           </div>
         </div>
       </div>
     </section>
+
+    </form>
 
     <script type="module" src="/script/lenis-scroll.js"></script>
     <script type="module" src="/script/transition.js"></script>
