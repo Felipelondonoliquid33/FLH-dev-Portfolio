@@ -848,7 +848,7 @@
 .onboard-outro {
   position: relative;
   width: 100vw;
-  min-height: 70svh;
+  min-height: 85svh;
   display: flex;
   flex-direction: column;
   background-color: var(--base-300);
@@ -860,19 +860,22 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 6rem 0;
+  text-align: center;
+  padding: 6rem 0 4rem;
 }
 
 .onboard-outro-content h3 {
-  font-size: clamp(4rem, 8vw, 8rem);
-  margin-bottom: 1rem;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  margin: 2.5rem 0 0;
   color: var(--base-100);
+  line-height: 0.95;
 }
 
 .onboard-outro-sub {
   color: var(--base-secondary-dark);
-  margin-bottom: 3rem;
+  margin-bottom: 1.75rem;
   letter-spacing: 0.15em;
 }
 
@@ -880,7 +883,8 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1.25rem;
+  justify-content: center;
+  margin-bottom: 1rem;
   position: relative;
   z-index: 2;
 }
@@ -889,8 +893,18 @@
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 2.5rem;
   opacity: 0.65;
+}
+
+.onboard-outro-end {
+  position: relative !important;
+  top: auto !important;
+  border-bottom: none;
+  border-top: 1px dashed rgba(249, 244, 235, 0.15);
+  margin-top: auto;
+  background: var(--base-300);
 }
 
 .onboard-outro-link {
@@ -948,6 +962,7 @@
   font-size: 0.75rem !important;
   letter-spacing: 0.06em;
   color: var(--base-secondary-dark);
+  text-align: center;
 }
 
 .onboard-form-status.is-pending {
@@ -991,7 +1006,13 @@
   .onboard-outro-links,
   .onboard-submit-actions {
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
+  }
+
+  .onboard-submit-btn {
+    width: min(100%, 320px);
+    justify-content: center;
   }
 
   .onboard-identity-grid {
