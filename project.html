@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blackboard AI Ecosystem | Felipe Londoño</title>
+    <title>GSAP Showroom | Felipe Londoño</title>
     <link rel="icon" href="/global/site-icon.png" />
     <link rel="stylesheet" href="/globals.css" />
     <link rel="stylesheet" href="/css/transition.css" />
@@ -11,30 +11,140 @@
     <link rel="stylesheet" href="/css/project.css" />
     <style>
       @media (max-width: 1000px) {
-        .project-info .container {
-          flex-direction: column !important;
-        }
-        .project-info .container .project-info-col:nth-child(1) {
-          display: block !important;
-          margin-bottom: 2rem;
-        }
+        .project-info .container { flex-direction: column !important; }
+        .project-info .container .project-info-col:nth-child(1) { display: block !important; margin-bottom: 2rem; }
+        .project-overview .container { flex-direction: column; gap: 3rem; }
+      }
+      :root { --gs-violet: #8b5cf6; --gs-violet-dim: rgba(139,92,246,0.10); }
+      .gs-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+      .gs-metric { padding: 1.25rem 1.5rem; border: 1px dashed rgba(139,92,246,0.25); border-radius: 10px; background: var(--gs-violet-dim); transition: border-color 0.3s, background 0.3s; }
+      .gs-metric:hover { border-color: rgba(139,92,246,0.5); background: rgba(139,92,246,0.18); }
+      .gs-metric-val { font-family: "Barlow Condensed",sans-serif; font-weight: 900; font-size: 2rem; color: var(--gs-violet); line-height: 1; margin-bottom: 0.3rem; }
+      .gs-metric-label { font-family: "DM Mono",monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--base-secondary-dark); }
+      .gs-arch { display: inline-flex; align-items: center; gap: 0.5rem; font-family: "DM Mono",monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gs-violet); border: 1px solid rgba(139,92,246,0.25); border-radius: 3px; padding: 0.25rem 0.6rem; margin-bottom: 1rem; }
+      .gs-arch-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gs-violet); animation: gs-pulse 1.5s ease-in-out infinite; }
+      @keyframes gs-pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+      .project-overview { padding-top: 4rem; }
+      .project-overview .container { gap: 5rem; align-items: center; }
+      .project-overview .container .project-overview-col:nth-child(1) { flex: 0 0 40%; max-width: 40%; }
+      .project-overview .container .project-overview-col:nth-child(2) { flex: 1; }
+
+      @media (max-width: 1000px) {
+        .project-overview .container { flex-direction: column; gap: 3rem; }
+        .project-overview .container .project-overview-col:nth-child(1) { flex: none; max-width: 100%; width: 100%; }
+      }
+
+      .yoahorro-video-showcase { position: relative; width: 100%; }
+      .svc-browser {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #05050a;
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 32px 80px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.2);
+        transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+        will-change: transform;
+      }
+      .svc-browser:hover {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 48px 100px rgba(0,0,0,0.4), 0 16px 40px rgba(0,0,0,0.25);
+      }
+      .svc-topbar {
+        display: flex; align-items: center; gap: 0.6rem;
+        padding: 0.65rem 1rem; background: #1a1a1a;
+        border-bottom: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 3;
+      }
+      .svc-dots { display: flex; gap: 5px; flex-shrink: 0; }
+      .svc-dot { width: 9px; height: 9px; border-radius: 50%; }
+      .svc-dot:nth-child(1) { background: #ff5f57; }
+      .svc-dot:nth-child(2) { background: #febc2e; }
+      .svc-dot:nth-child(3) { background: #28c840; }
+      .svc-url-bar {
+        flex: 1; display: flex; align-items: center; gap: 0.4rem;
+        background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 5px; padding: 0.28rem 0.65rem;
+        font-family: "DM Mono", monospace; font-size: 0.62rem;
+        color: rgba(255,255,255,0.45); letter-spacing: 0.04em;
+        overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 100%;
+      }
+      .svc-url-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gs-violet); flex-shrink: 0; }
+      .svc-live-badge {
+        flex-shrink: 0; display: flex; align-items: center; gap: 5px;
+        font-family: "DM Mono", monospace; font-size: 0.58rem;
+        text-transform: uppercase; letter-spacing: 0.08em; color: var(--gs-violet);
+        padding: 0.2rem 0.5rem; border: 1px solid rgba(139,92,246,0.35); border-radius: 3px;
+      }
+      .svc-live-pulse { width: 5px; height: 5px; border-radius: 50%; background: var(--gs-violet); animation: svc-pulse 1.4s ease-in-out infinite; }
+      @keyframes svc-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+      .svc-video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
+      .svc-video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .svc-scanlines {
+        position: absolute; inset: 0;
+        background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+        pointer-events: none; z-index: 2; mix-blend-mode: multiply;
+      }
+      .svc-play-btn {
+        position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+        z-index: 4; background: rgba(0,0,0,0.15); opacity: 0; transition: opacity 0.3s ease;
+      }
+      .svc-video-wrapper:hover .svc-play-btn { opacity: 1; }
+      .svc-play-icon {
+        width: 52px; height: 52px; border-radius: 50%; background: rgba(139,92,246,0.9);
+        display: flex; align-items: center; justify-content: center;
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(255,255,255,0.25); transition: transform 0.2s ease, background 0.2s ease;
+      }
+      .svc-play-icon:hover { transform: scale(1.1); background: rgba(139,92,246,1); }
+      .svc-play-icon svg { width: 18px; height: 18px; fill: white; margin-left: 2px; }
+      .svc-play-icon.is-playing svg.icon-play { display: none; }
+      .svc-play-icon.is-playing svg.icon-pause { display: block !important; }
+      .svc-play-icon svg.icon-pause { display: none; }
+      .svc-progress-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,0.1); z-index: 5; }
+      .svc-progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #a78bfa); width: 0%; transition: width 0.1s linear; border-radius: 0 2px 2px 0; }
+      .svc-bottombar {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0.5rem 1rem; background: #0f0f0f; border-top: 1px solid rgba(255,255,255,0.04);
+      }
+      .svc-time { font-family: "DM Mono", monospace; font-size: 0.6rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+      .svc-mute-btn {
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: flex; align-items: center; gap: 4px;
+        font-family: "DM Mono", monospace; font-size: 0.58rem;
+        text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.3);
+      }
+      .svc-mute-btn:hover { color: rgba(255,255,255,0.7); }
+      .svc-floating-label {
+        position: absolute; top: -12px; right: -12px; z-index: 10;
+        background: var(--base-300); color: var(--base-100); border-radius: 8px;
+        padding: 0.5rem 0.85rem; display: flex; flex-direction: column; gap: 2px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      }
+      .svc-floating-label .sfl-title { font-family: "DM Mono", monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(249,244,235,0.5); }
+      .svc-floating-label .sfl-name { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; color: var(--base-100); line-height: 1; }
+      .svc-glow {
+        position: absolute; inset: -20px;
+        background: radial-gradient(ellipse at 50% 60%, rgba(139,92,246,0.16), transparent 70%);
+        z-index: -1; pointer-events: none; border-radius: 20px;
+      }
+      @media (max-width: 1000px) {
+        .yoahorro-video-showcase { margin-bottom: 3rem; }
+        .svc-browser { transform: none; }
+        .svc-floating-label { top: -8px; right: -4px; }
       }
     </style>
   </head>
   <body>
     <div class="transition">
       <div class="transition-overlay overlay"></div>
-      <div class="transition-logo">
-        <img src="/global/logo.png" alt="Logo" />
-      </div>
+      <div class="transition-logo"><img src="/global/logo.png" alt="Logo" /></div>
     </div>
-
     <div class="mask-transition"></div>
     <div class="mask-bg-overlay"></div>
 
     <nav class="menu">
       <div class="menu-header">
-        <a href="#" class="menu-logo"><img src="/global/logo.png" alt="" /></a>
+        <a href="/" class="menu-logo"><img src="/global/logo.png" alt="" /></a>
         <button class="menu-toggle" aria-label="Toggle menu">
           <div class="menu menu-hamburger-icon">
             <span class="menu-item"></span>
@@ -65,57 +175,33 @@
     <div class="home-spotlight-top-bar">
       <div class="container">
         <div class="symbols-container">
-          <div class="symbol">
-            <img src="/symbols/s1-dark.png" alt="Symbol" />
-          </div>
+          <div class="symbol"><img src="/symbols/s1-dark.png" alt="Symbol" /></div>
         </div>
         <div class="symbols-container">
-          <div class="symbol">
-            <img src="/symbols/s1-dark.png" alt="Symbol" />
-          </div>
+          <div class="symbol"><img src="/symbols/s1-dark.png" alt="Symbol" /></div>
         </div>
       </div>
     </div>
 
     <section class="project-header">
       <div class="container">
-        <div class="project-title" style="display: flex; align-items: center; gap: 1.5rem;">
-          <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <circle cx="50" cy="50" r="45" fill="#2E7EED"/>
-            <path d="M38 25V75" stroke="white" stroke-width="8" stroke-linecap="round"/>
-            <path d="M38 48C45 48 55 48 62 55C67 60 67 70 62 75C55 80 45 80 38 80" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="48" cy="35" r="7" fill="white"/>
-          </svg>
-          <h3 data-animate-type="reveal" data-animate-delay="0.25">
-            Blackboard AI Ecosystem
-          </h3>
+        <div class="project-title">
+          <h3 data-animate-type="reveal" data-animate-delay="0.25">GSAP Showroom</h3>
         </div>
         <div class="project-header-divider"></div>
         <div class="project-meta">
           <div class="project-meta-col">
-            <p data-animate-type="line-reveal" data-animate-delay="0.25">
-              Blackboard LMS
-            </p>
-            <p data-animate-type="line-reveal" data-animate-delay="0.3">
-              AI integration & Knowledge Automation
-            </p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.25">Private Component Gallery</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.3">GSAP &amp; WebGL motion vault</p>
           </div>
           <div class="project-meta-col">
             <div class="project-meta-sub-col">
-              <p data-animate-type="line-reveal" data-animate-delay="0.25">
-                October 2024 - Present
-              </p>
-              <p data-animate-type="line-reveal" data-animate-delay="0.3">
-                AI Integration &amp; Knowledge Automation
-              </p>
+              <p data-animate-type="line-reveal" data-animate-delay="0.25">July 2026</p>
+              <p data-animate-type="line-reveal" data-animate-delay="0.3">Next.js App Router library</p>
             </div>
             <div class="project-meta-sub-col">
-              <p data-animate-type="line-reveal" data-animate-delay="0.25">
-                Role
-              </p>
-              <p data-animate-type="line-reveal" data-animate-delay="0.3">
-                Sales Enablement Manager &amp; Instructional Designer
-              </p>
+              <p data-animate-type="line-reveal" data-animate-delay="0.25">Role</p>
+              <p data-animate-type="line-reveal" data-animate-delay="0.3">Creative Technologist &amp; UI Architect</p>
             </div>
           </div>
         </div>
@@ -124,117 +210,99 @@
 
     <section class="project-banner-img">
       <div class="container">
-        <img src="/project-images/project-img-2.jpg" alt="" />
+        <img src="/project-images/gsap-showroom-img-1.png" alt="GSAP Showroom — Inspector modal with live component" />
       </div>
     </section>
 
     <section class="project-overview">
       <div class="container">
-        <div class="project-overview-col"></div>
         <div class="project-overview-col">
+          <div class="yoahorro-video-showcase">
+            <div class="svc-glow"></div>
+            <div class="svc-floating-label">
+              <span class="sfl-title">Showcase Reel</span>
+              <span class="sfl-name">GSAP Showroom</span>
+            </div>
+            <div class="svc-browser" id="svc-browser">
+              <div class="svc-topbar">
+                <div class="svc-dots">
+                  <div class="svc-dot"></div>
+                  <div class="svc-dot"></div>
+                  <div class="svc-dot"></div>
+                </div>
+                <div class="svc-url-bar">
+                  <div class="svc-url-dot"></div>
+                  localhost:3000 — private vault
+                </div>
+                <div class="svc-live-badge">
+                  <div class="svc-live-pulse"></div>
+                  Demo
+                </div>
+              </div>
+              <div class="svc-video-wrapper" id="svc-wrapper">
+                <video
+                  id="svc-video"
+                  src="/project-images/gsap-showroom-showcase.mp4"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+                <div class="svc-scanlines"></div>
+                <div class="svc-play-btn" id="svc-play-btn">
+                  <div class="svc-play-icon" id="svc-play-icon">
+                    <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                  </div>
+                </div>
+                <div class="svc-progress-bar">
+                  <div class="svc-progress-fill" id="svc-progress"></div>
+                </div>
+              </div>
+              <div class="svc-bottombar">
+                <span class="svc-time" id="svc-time">0:00 / 0:00</span>
+                <button class="svc-mute-btn" id="svc-mute-btn">Muted</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-overview-col">
+          <div class="gs-arch"><span class="gs-arch-dot"></span> Private vault — no public deploy</div>
           <div class="project-stack">
-            <p
-              class="mono"
-              data-animate-type="scramble"
-              data-animate-delay="0.2"
-              data-animate-on-scroll="true"
-            >
-              <span>&#9654;</span> Stack
-            </p>
+            <p class="mono" data-animate-type="scramble" data-animate-delay="0.2" data-animate-on-scroll="true"><span>&#9654;</span> Stack</p>
             <br />
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.3"
-              data-animate-on-scroll="true"
-            >
-              Copilot Studio
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.4"
-              data-animate-on-scroll="true"
-            >
-              SharePoint
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.5"
-              data-animate-on-scroll="true"
-            >
-              Blackboard Ultra
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.6"
-              data-animate-on-scroll="true"
-            >
-              HTML5 / CSS3
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.7"
-              data-animate-on-scroll="true"
-            >
-              TypeScript
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.8"
-              data-animate-on-scroll="true"
-            >
-              LMS Analytics
-            </p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.3" data-animate-on-scroll="true">Next.js App Router</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.4" data-animate-on-scroll="true">GSAP + ScrollTrigger</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.5" data-animate-on-scroll="true">WebGL / Canvas 2D</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.6" data-animate-on-scroll="true">TypeScript + Tailwind</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.7" data-animate-on-scroll="true">Playwright capture pipeline</p>
+            <p data-animate-type="line-reveal" data-animate-delay="0.8" data-animate-on-scroll="true">FFmpeg film assembly</p>
           </div>
           <div class="project-overview-copy">
-            <p
-              class="mono"
-              data-animate-type="scramble"
-              data-animate-delay="0.9"
-              data-animate-on-scroll="true"
-            >
-              <span>&#9654;</span> Strategy &amp; Implementation
-            </p>
+            <p class="mono" data-animate-type="scramble" data-animate-delay="0.9" data-animate-on-scroll="true"><span>&#9654;</span> What It Is</p>
             <br />
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="1"
-              data-animate-on-scroll="true"
-            >
-              I design and lead scalable enablement programs that bridge commercial strategy and technical architecture. My work integrates Copilot Studio, SharePoint, and AI chatbots to automate LMS onboarding, leveraging modular HTML/CSS components and TypeScript for system customization inside Blackboard Ultra.
+            <p data-animate-type="line-reveal" data-animate-delay="1" data-animate-on-scroll="true">
+              A private gallery of production-grade GSAP and WebGL modules. Preview them live, inspect the motion, copy the real TSX. Not mockups — every card is the component actually running, with viewport gating so the vault stays at 60fps.
             </p>
-            <br />
-            <p
-              class="mono"
-              data-animate-type="scramble"
-              data-animate-delay="1.1"
-              data-animate-on-scroll="true"
-            >
-              <span>&#9654;</span> Key Impact
-            </p>
-            <br />
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="1.2"
-              data-animate-on-scroll="true"
-              style="margin-bottom: 0.5rem;"
-            >
-              • Architected an AI-powered knowledge ecosystem, reducing support queries by 60%
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="1.3"
-              data-animate-on-scroll="true"
-              style="margin-bottom: 0.5rem;"
-            >
-              • Integrated Copilot Studio and SharePoint to establish adaptive, self-directed learning paths
-            </p>
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="1.4"
-              data-animate-on-scroll="true"
-            >
-              • Implemented gamified microlearning journeys, driving a 40% increase in course completion rates
-            </p>
+            <div class="gs-metrics">
+              <div class="gs-metric">
+                <p class="gs-metric-val">295</p>
+                <p class="gs-metric-label">Live modules</p>
+              </div>
+              <div class="gs-metric">
+                <p class="gs-metric-val">0</p>
+                <p class="gs-metric-label">Console errors / leaks</p>
+              </div>
+              <div class="gs-metric">
+                <p class="gs-metric-val">60</p>
+                <p class="gs-metric-label">FPS lifecycle target</p>
+              </div>
+              <div class="gs-metric">
+                <p class="gs-metric-val">7</p>
+                <p class="gs-metric-label">Audit passes to v1.0</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -244,153 +312,54 @@
       <div class="home-spotlight-top-bar">
         <div class="container">
           <div class="symbols-container">
-            <div class="symbol">
-              <img src="/symbols/s1-light.png" alt="Symbol" />
-            </div>
-            <div class="symbol">
-              <img src="/symbols/s2-light.png" alt="Symbol" />
-            </div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="Symbol" /></div>
           </div>
           <div class="symbols-container">
-            <div class="symbol">
-              <img src="/symbols/s2-light.png" alt="Symbol" />
-            </div>
-            <div class="symbol">
-              <img src="/symbols/s1-light.png" alt="Symbol" />
-            </div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="Symbol" /></div>
           </div>
         </div>
       </div>
       <div class="home-spotlight-bottom-bar">
         <div class="container">
-          <p
-            class="mono"
-            data-animate-type="scramble"
-            data-animate-delay="0.2"
-            data-animate-on-scroll="true"
-          >
-            <span>&#9654;</span> Interface Study
-          </p>
-          <p
-            class="mono"
-            data-animate-type="scramble"
-            data-animate-delay="0.25"
-            data-animate-on-scroll="true"
-          >
-            / Moodboard
-          </p>
+          <p class="mono" data-animate-type="scramble" data-animate-delay="0.2" data-animate-on-scroll="true"><span>&#9654;</span> Interface Study</p>
+          <p class="mono" data-animate-type="scramble" data-animate-delay="0.25" data-animate-on-scroll="true">/ Vault UI</p>
         </div>
       </div>
       <div class="project-snapshots-wrapper">
-        <div class="project-snapshot">
-          <img src="/project-images/blackboard-screenshot.png" alt="Blackboard Objections Panel" />
-        </div>
-        <div class="project-snapshot">
-          <img src="/project-images/project-img-2.jpg" alt="Blackboard AI Integration Workspace" />
-        </div>
-        <div class="project-snapshot">
-          <img src="/project-images/blackboard-screenshot.png" alt="Demo Talk Track: Course Design" />
-        </div>
-        <div class="project-snapshot">
-          <img src="/project-images/project-img-2.jpg" alt="LMS Architecture Audit" />
-        </div>
-      </div>
-      <div class="snapshots-progress-bar">
-        <div class="progress-bar"></div>
+        <div class="project-snapshot"><img src="/project-images/gsap-showroom-img-1.png" alt="Inspector modal — live component + source" /></div>
+        <div class="project-snapshot"><img src="/project-images/gsap-showroom-img-2.png" alt="Source panel — real TSX, one-click copy" /></div>
+        <div class="project-snapshot"><img src="/project-images/gsap-showroom-img-3.png" alt="IsometricCube gallery card" /></div>
+        <div class="project-snapshot"><img src="/project-images/gsap-showroom-img-4.png" alt="Live preview stage" /></div>
+        <div class="project-snapshot"><img src="/project-images/gsap-showroom-img-5.png" alt="Category index sidebar" /></div>
       </div>
     </section>
 
     <section class="project-info">
       <div class="container">
         <div class="project-info-col">
-          <!-- Interactive Certifications Component -->
           <div class="cert-component" style="padding: 2rem; border: 1px dashed rgba(10, 10, 10, 0.2); border-radius: 8px; background: rgba(0, 0, 0, 0.02);">
             <p class="mono" style="font-size: 0.8rem; letter-spacing: 0.1em; color: var(--base-secondary-dark); margin-bottom: 0.5rem;">
-              <span>&#9654;</span> Verified Credentials
+              <span>&#9654;</span> How you use it
             </p>
-            <h4 style="font-size: 1.8rem; font-family: 'Barlow Condensed'; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: var(--base-300);">Blackboard Certifications</h4>
-            <div class="cert-tabs" style="display: flex; gap: 10px; margin-bottom: 1.2rem;">
-              <button onclick="showCert('admin')" id="tab-admin" class="cert-tab-btn" style="padding: 0.5rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; border: 1px solid var(--base-300); background: var(--base-300); color: var(--base-100); cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;">
-                Administration
-              </button>
-              <button onclick="showCert('design')" id="tab-design" class="cert-tab-btn" style="padding: 0.5rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; border: 1px solid rgba(10, 10, 10, 0.2); background: transparent; color: var(--base-secondary-dark); cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;">
-                Course Design
-              </button>
-            </div>
-            <div id="cert-content-admin" class="cert-content" style="display: block;">
-              <p class="mono" style="color: #2E7EED; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Certified Blackboard Administrator</p>
-              <p style="font-size: 0.95rem; line-height: 1.4; color: var(--base-300); opacity: 0.85;">
-                Credentialed in systems administration, LTI integrations, data governance, user role configuration, and analytics tracking models.
-              </p>
-            </div>
-            <div id="cert-content-design" class="cert-content" style="display: none;">
-              <p class="mono" style="color: #2E7EED; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Certified Blackboard Course Designer</p>
-              <p style="font-size: 0.95rem; line-height: 1.4; color: var(--base-300); opacity: 0.85;">
-                Pedagogical structuring, custom HTML/CSS injection, adaptive learning path design, gamification flows, and accessible visual hierarchies.
-              </p>
-            </div>
+            <h4 style="font-size: 1.8rem; font-family: 'Barlow Condensed'; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: var(--base-300);">Search. Inspect. Copy.</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--base-300); opacity: 0.85; margin-bottom: 1rem;">
+              Filter by category (scroll, cursor, 3D, canvas). Search CamelCase names. Open a module — it is not a video, it is the component running. Scroll the real file. One click, it is yours.
+            </p>
+            <p class="mono" style="color: var(--gs-violet); font-size: 0.75rem; letter-spacing: 0.08em;">LIVE. NOT A MOCKUP. · COPY. PASTE. SHIP.</p>
           </div>
-          
-          <script>
-            function showCert(type) {
-              const btnAdmin = document.getElementById('tab-admin');
-              const btnDesign = document.getElementById('tab-design');
-              
-              if (type === 'admin') {
-                document.getElementById('cert-content-admin').style.display = 'block';
-                document.getElementById('cert-content-design').style.display = 'none';
-                
-                btnAdmin.style.background = 'var(--base-300)';
-                btnAdmin.style.color = 'var(--base-100)';
-                btnAdmin.style.borderColor = 'var(--base-300)';
-                
-                btnDesign.style.background = 'transparent';
-                btnDesign.style.color = 'var(--base-secondary-dark)';
-                btnDesign.style.borderColor = 'rgba(10, 10, 10, 0.2)';
-              } else {
-                document.getElementById('cert-content-admin').style.display = 'none';
-                document.getElementById('cert-content-design').style.display = 'block';
-                
-                btnDesign.style.background = 'var(--base-300)';
-                btnDesign.style.color = 'var(--base-100)';
-                btnDesign.style.borderColor = 'var(--base-300)';
-                
-                btnAdmin.style.background = 'transparent';
-                btnAdmin.style.color = 'var(--base-secondary-dark)';
-                btnAdmin.style.borderColor = 'rgba(10, 10, 10, 0.2)';
-              }
-            }
-          </script>
         </div>
         <div class="project-info-col">
           <div class="project-info-copy">
-            <p
-              class="mono"
-              data-animate-type="scramble"
-              data-animate-delay="0.2"
-              data-animate-on-scroll="true"
-            >
-              <span>&#9654;</span> Key Achievements
+            <p class="mono" data-animate-type="scramble" data-animate-delay="0.2" data-animate-on-scroll="true"><span>&#9654;</span> Architecture</p>
+            <br />
+            <p data-animate-type="line-reveal" data-animate-delay="0.25" data-animate-on-scroll="true">
+              285 showcase modules plus 10 preview leads, audited across seven passes. IntersectionObserver gates every card. Named ticker cleanup, no anonymous leaks. ScrollTrigger lives inside GSAP context so unmount kills it.
             </p>
             <br />
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.25"
-              data-animate-on-scroll="true"
-            >
-              Designed and architected an AI-powered knowledge ecosystem that successfully
-              reduced support tickets and repetitive queries by 60%. Integrated Copilot Studio with
-              SharePoint to create adaptive, self-directed onboarding flows.
-            </p>
-            <br />
-            <p
-              data-animate-type="line-reveal"
-              data-animate-delay="0.7"
-              data-animate-on-scroll="true"
-            >
-              Developed and implemented gamified microlearning paths that resulted in a 40% higher
-              completion rate. Designed governance models for user engagement data to refine future learning
-              strategies and maximize system ROI.
+            <p data-animate-type="line-reveal" data-animate-delay="0.7" data-animate-on-scroll="true">
+              The marketing film is a separate pipeline: Playwright records the vault being used, FFmpeg cuts intertitles and xfade into a 46s reel. The app never serves those files — library and positioning stay split on purpose.
             </p>
           </div>
         </div>
@@ -401,33 +370,19 @@
       <div class="home-spotlight-top-bar">
         <div class="container">
           <div class="symbols-container">
-            <div class="symbol">
-              <img src="/symbols/s1-light.png" alt="Symbol" />
-            </div>
-            <div class="symbol">
-              <img src="/symbols/s2-light.png" alt="Symbol" />
-            </div>
-            <div class="symbol">
-              <img src="/symbols/s3-light.png" alt="Symbol" />
-            </div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s3-light.png" alt="Symbol" /></div>
           </div>
           <div class="symbols-container">
-            <div class="symbol">
-              <img src="/symbols/s3-light.png" alt="Symbol" />
-            </div>
-            <div class="symbol">
-              <img src="/symbols/s2-light.png" alt="Symbol" />
-            </div>
-            <div class="symbol">
-              <img src="/symbols/s1-light.png" alt="Symbol" />
-            </div>
+            <div class="symbol"><img src="/symbols/s3-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s2-light.png" alt="Symbol" /></div>
+            <div class="symbol"><img src="/symbols/s1-light.png" alt="Symbol" /></div>
           </div>
         </div>
       </div>
       <div class="container next-project-data">
-        <div class="next-project-title">
-          <h3>YoAhorro IA</h3>
-        </div>
+        <div class="next-project-title"><h3>YoAhorro IA</h3></div>
         <div class="next-project-header-divider"></div>
         <div class="next-project-meta">
           <div class="next-project-meta-col">
@@ -453,6 +408,70 @@
         </div>
       </div>
     </section>
+
+    <script>
+      (function () {
+        const video   = document.getElementById("svc-video");
+        const wrapper = document.getElementById("svc-wrapper");
+        const playIcon = document.getElementById("svc-play-icon");
+        const progress = document.getElementById("svc-progress");
+        const timeEl  = document.getElementById("svc-time");
+        const muteBtn = document.getElementById("svc-mute-btn");
+        if (!video) return;
+
+        function fmt(s) {
+          const m = Math.floor(s / 60);
+          const sec = Math.floor(s % 60);
+          return m + ":" + (sec < 10 ? "0" : "") + sec;
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              video.play().catch(() => {});
+              playIcon.classList.add("is-playing");
+              obs.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        obs.observe(wrapper);
+
+        wrapper.addEventListener("click", () => {
+          if (video.paused) {
+            video.play();
+            playIcon.classList.add("is-playing");
+          } else {
+            video.pause();
+            playIcon.classList.remove("is-playing");
+          }
+        });
+
+        video.addEventListener("timeupdate", () => {
+          if (!video.duration) return;
+          progress.style.width = (video.currentTime / video.duration) * 100 + "%";
+          timeEl.textContent = fmt(video.currentTime) + " / " + fmt(video.duration);
+        });
+
+        muteBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          muteBtn.textContent = video.muted ? "Muted" : "Audio";
+        });
+
+        const browser = document.getElementById("svc-browser");
+        browser.addEventListener("mousemove", (e) => {
+          const rect = browser.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / rect.width;
+          const dy = (e.clientY - cy) / rect.height;
+          browser.style.transform = `perspective(1000px) rotateY(${dx * 8}deg) rotateX(${-dy * 5}deg)`;
+        });
+        browser.addEventListener("mouseleave", () => {
+          browser.style.transform = "perspective(1000px) rotateY(-4deg) rotateX(2deg)";
+        });
+      })();
+    </script>
 
     <script type="module" src="/script/lenis-scroll.js"></script>
     <script type="module" src="/script/transition.js"></script>

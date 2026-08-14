@@ -1,11 +1,11 @@
 const slides = [
   {
-    slideTitle: "Blackboard AI Ecosystem",
+    slideTitle: "GSAP Showroom",
     slideDescription:
-      "Scalable enablement programs bridging commercial strategy and technical architecture. Integrating Copilot Studio, SharePoint, and AI chatbots to automate LMS onboarding with modular HTML/CSS custom layouts.",
+      "A private vault of 295 production-grade GSAP and WebGL modules. Preview live, inspect the motion, copy the real TSX — not mockups.",
     slideUrl: "/project",
-    slideTags: ["AI Integration", "Blackboard", "LMS", "Copilot Studio"],
-    slideImg: "/work/slider-img-1.jpg",
+    slideTags: ["GSAP", "WebGL", "Next.js", "Motion Library"],
+    slideImg: "/work/slider-img-gsap.png",
   },
   {
     slideTitle: "YoAhorro IA",
